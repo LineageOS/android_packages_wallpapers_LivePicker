@@ -19,7 +19,6 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General -->
-  <skip></skip>
   <!-- Application name -->
   <string name="application_name">Galerie vu Live-Hannergrondbiller</string>
   <!-- Title for the screen that lets the user choose a live wallpaper to use
@@ -42,7 +41,9 @@
   <!-- Message, tells the user the selected live wallpaper is loading. -->
   <string name="live_wallpaper_loading">Live-Hannergrondbild gëtt gelueden&#8230;</string>
   <!-- Option for setting the wallpaper only on the home screen. -->
+  <string name="which_wallpaper_option_home_screen">Startschierm</string>
   <!-- Option for setting the wallpaper on both the home screen and lock screen. -->
+  <string name="which_wallpaper_option_home_screen_and_lock_screen">Startschierm a Spärschierm</string>
   <!-- Content description for a button letting the user collapse a visual panel showing info
          about the wallpaper being previewed. [CHAR LIMIT=none] -->
   <!-- Content description for a button letting the user expand a visual panel showing info about
