@@ -32,9 +32,13 @@
   <!-- Label, title and author of the live wallpaper -->
   <!-- Message, tells the user the selected live wallpaper is loading. -->
   <!-- Option for setting the wallpaper only on the home screen. -->
+  <string name="which_wallpaper_option_home_screen">Pantalla d\'aniciu</string>
   <!-- Option for setting the wallpaper on both the home screen and lock screen. -->
+  <string name="which_wallpaper_option_home_screen_and_lock_screen">Pantalles d\'aniciu y bloquéu</string>
   <!-- Content description for a button letting the user collapse a visual panel showing info
          about the wallpaper being previewed. [CHAR LIMIT=none] -->
+  <string name="collapse_attribution_panel">Recoyer panel d\'información de fondu de pantalla</string>
   <!-- Content description for a button letting the user expand a visual panel showing info about
          the wallpaper being previewed. [CHAR LIMIT=none] -->
+  <string name="expand_attribution_panel">Espander panel d\'información de fondu de pantalla</string>
 </resources>
