@@ -21,7 +21,7 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="application_name" msgid="4119979710394894209">"နောက်ခံပုံအရှင် ရွေးချယ်ခန်း"</string>
     <string name="live_wallpaper_picker_title" msgid="4811278937634144675">"သက်ရှိနောက်ခံရွေးချယ်ခြင်း"</string>
-    <string name="live_wallpaper_picker_label" msgid="3218000114890071946">"နောက်ခံအရှင်များ"</string>
+    <string name="live_wallpaper_picker_label" msgid="3218000114890071946">"သက်ဝင်နောက်ခံများ"</string>
     <string name="live_wallpaper_preview_title" msgid="1130080613611954763">"နောက်ခံပုံအရှင် ကြိုကြည့်မယ်"</string>
     <string name="configure_wallpaper" msgid="7396598925806288258">"ဆက်တင်များ"</string>
     <string name="wallpaper_instructions" msgid="4215640646180727542">"နောက်ခံပုံ သတ်မှတ်ပါ"</string>
