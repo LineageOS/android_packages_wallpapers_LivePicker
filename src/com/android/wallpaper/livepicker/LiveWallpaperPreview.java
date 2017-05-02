@@ -18,6 +18,7 @@ package com.android.wallpaper.livepicker;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.WallpaperColors;
 import android.app.WallpaperInfo;
 import android.app.WallpaperManager;
 import android.content.ActivityNotFoundException;
@@ -481,6 +482,11 @@ public class LiveWallpaperPreview extends Activity {
         
         public ParcelFileDescriptor setWallpaper(String name) {
             return null;
+        }
+
+        @Override
+        public void onWallpaperColorsChanged(WallpaperColors colors) throws RemoteException {
+
         }
 
         @Override
