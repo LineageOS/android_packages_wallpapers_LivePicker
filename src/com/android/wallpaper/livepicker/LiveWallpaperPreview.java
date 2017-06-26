@@ -439,7 +439,12 @@ public class LiveWallpaperPreview extends Activity {
                     }
                     mEngine = null;
                 }
-                unbindService(this);
+                try {
+                    unbindService(this);
+                } catch (IllegalArgumentException e) {
+                    Log.w(LOG_TAG, "Can't unbind wallpaper service. "
+                            + "It might have crashed, just ignoring.", e);
+                }
                 mService = null;
             }
         }
@@ -485,7 +490,7 @@ public class LiveWallpaperPreview extends Activity {
                 }
             }
         }
-        
+
         public ParcelFileDescriptor setWallpaper(String name) {
             return null;
         }
