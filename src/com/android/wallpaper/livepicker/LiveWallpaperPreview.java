@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Rect;
@@ -71,9 +72,9 @@ public class LiveWallpaperPreview extends Activity {
     private WallpaperManager mWallpaperManager;
     private WallpaperConnection mWallpaperConnection;
 
-    private String mSettings;
     private String mPackageName;
     private Intent mWallpaperIntent;
+    private Intent mSettingsIntent;
 
     private TextView mAttributionTitle;
     private TextView mAttributionSubtitle1;
@@ -115,10 +116,22 @@ public class LiveWallpaperPreview extends Activity {
         mSpacer = findViewById(R.id.spacer);
         mLoading = findViewById(R.id.loading);
 
-        mSettings = info.getSettingsActivity();
         mPackageName = info.getPackageName();
         mWallpaperIntent = new Intent(WallpaperService.SERVICE_INTERFACE)
                 .setClassName(info.getPackageName(), info.getServiceName());
+
+        final String settingsActivity = info.getSettingsActivity();
+        if (settingsActivity != null) {
+            mSettingsIntent = new Intent();
+            mSettingsIntent.setComponent(new ComponentName(mPackageName, settingsActivity));
+            mSettingsIntent.putExtra(WallpaperSettingsActivity.EXTRA_PREVIEW_MODE, true);
+            final PackageManager pm = getPackageManager();
+            final ActivityInfo activityInfo = mSettingsIntent.resolveActivityInfo(pm, 0);
+            if (activityInfo == null) {
+                Log.e(LOG_TAG, "Couldn't find settings activity: " + settingsActivity);
+                mSettingsIntent = null;
+            }
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setActionBar(toolbar);
@@ -253,7 +266,7 @@ public class LiveWallpaperPreview extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_preview, menu);
-        menu.findItem(R.id.configure).setVisible(mSettings != null);
+        menu.findItem(R.id.configure).setVisible(mSettingsIntent != null);
         menu.findItem(R.id.set_wallpaper).getActionView().setOnClickListener(
                 this::setLiveWallpaper);
         return super.onCreateOptionsMenu(menu);
@@ -308,10 +321,7 @@ public class LiveWallpaperPreview extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.configure) {
-            Intent intent = new Intent();
-            intent.setComponent(new ComponentName(mPackageName, mSettings));
-            intent.putExtra(WallpaperSettingsActivity.EXTRA_PREVIEW_MODE, true);
-            startActivity(intent);
+            startActivity(mSettingsIntent);
             return true;
         } else if (id == R.id.set_wallpaper) {
             setLiveWallpaper(getWindow().getDecorView());
