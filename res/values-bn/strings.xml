@@ -20,7 +20,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="application_name" msgid="4119979710394894209">"লাইভ ওয়ালপেপার পিকার"</string>
-    <string name="live_wallpaper_picker_title" msgid="4811278937634144675">"লাইভ ওয়ালপেপার নির্বাচন করুন"</string>
+    <string name="live_wallpaper_picker_title" msgid="4811278937634144675">"লাইভ ওয়ালপেপার বেছে নিন"</string>
     <string name="live_wallpaper_picker_label" msgid="3218000114890071946">"লাইভ ওয়ালপেপারগুলি"</string>
     <string name="live_wallpaper_preview_title" msgid="1130080613611954763">"লাইভ ওয়ালপেপারের প্রাকদর্শন"</string>
     <string name="configure_wallpaper" msgid="7396598925806288258">"সেটিংস..."</string>
