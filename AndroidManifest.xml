@@ -33,7 +33,7 @@
 
     <application
         android:label="@string/application_name"
-        android:icon="@mipmap/ic_launcher_live_wallpaper"
+        android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true" >
 
         <activity android:name="LiveWallpaperActivity"
