@@ -48,17 +48,17 @@ LOCAL_CERTIFICATE := platform
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
-    android-support-annotations
+    androidx.annotation_annotation
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
-    android-support-v7-appcompat \
-    android-support-compat \
-    android-support-core-utils \
-    android-support-core-ui \
-    android-support-fragment \
-    $(ANDROID_SUPPORT_DESIGN_TARGETS) \
-    android-support-transition \
-    android-support-v7-recyclerview
+    androidx.appcompat_appcompat \
+    androidx.core_core \
+    androidx.legacy_legacy-support-core-utils \
+    androidx.legacy_legacy-support-core-ui \
+    androidx.fragment_fragment \
+    androidx.design_design \
+    androidx.transition_transition \
+    androidx.recyclerview_recyclerview
 
 LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res
 
