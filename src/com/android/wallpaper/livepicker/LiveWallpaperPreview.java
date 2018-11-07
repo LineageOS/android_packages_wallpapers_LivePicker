@@ -516,6 +516,7 @@ public class LiveWallpaperPreview extends Activity {
                 mLoading.animate()
                         .alpha(0f)
                         .setDuration(220)
+                        .setStartDelay(300)
                         .setInterpolator(AnimationUtils.loadInterpolator(LiveWallpaperPreview.this,
                                 android.R.interpolator.fast_out_linear_in))
                         .withEndAction(() -> mLoading.setVisibility(View.INVISIBLE));
