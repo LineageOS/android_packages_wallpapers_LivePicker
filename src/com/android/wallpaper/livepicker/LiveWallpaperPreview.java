@@ -458,16 +458,17 @@ public class LiveWallpaperPreview extends Activity {
                 mService = null;
             }
         }
-        
+
         public void onServiceConnected(ComponentName name, IBinder service) {
             if (mWallpaperConnection == this) {
                 mService = IWallpaperService.Stub.asInterface(service);
                 try {
+                    final int displayId = getWindow().getDecorView().getDisplay().getDisplayId();
                     final View root = getWindow().getDecorView();
                     mService.attach(this, root.getWindowToken(),
                             LayoutParams.TYPE_APPLICATION_MEDIA,
                             true, root.getWidth(), root.getHeight(),
-                            new Rect(0, 0, 0, 0));
+                            new Rect(0, 0, 0, 0), displayId);
                 } catch (RemoteException e) {
                     Log.w(LOG_TAG, "Failed attaching wallpaper; clearing", e);
                 }
@@ -482,7 +483,7 @@ public class LiveWallpaperPreview extends Activity {
             }
         }
         
-        public void attachEngine(IWallpaperEngine engine) {
+        public void attachEngine(IWallpaperEngine engine, int displayId) {
             synchronized (this) {
                 if (mConnected) {
                     mEngine = engine;
