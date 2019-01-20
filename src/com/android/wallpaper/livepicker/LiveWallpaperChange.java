@@ -20,11 +20,17 @@ import android.app.WallpaperInfo;
 import android.app.WallpaperManager;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.service.wallpaper.WallpaperService;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -33,6 +39,7 @@ import java.util.List;
 
 public class LiveWallpaperChange extends LiveWallpaperPreview {
     private static final String TAG = "CHANGE_LIVE_WALLPAPER";
+    private static final String KEY_ACTION_DELETE_LIVE_WALLPAPER = "action_delete_live_wallpaper";
 
     @Override
     protected void init() {
@@ -65,8 +72,7 @@ public class LiveWallpaperChange extends LiveWallpaperPreview {
                         finish();
                         return;
                     }
-
-                    initUI(info);
+                    initUI(info, getDeleteAction(ri.serviceInfo));
                     return;
                 }
             }
@@ -74,5 +80,26 @@ public class LiveWallpaperChange extends LiveWallpaperPreview {
 
         Log.w(TAG, "Not a live wallpaper: " + comp);
         finish();
+    }
+
+    @Nullable
+    private String getDeleteAction(@NonNull ServiceInfo serviceInfo) {
+        if (!isPackagePreInstalled(serviceInfo.applicationInfo)) {
+            Log.d(TAG, "This wallpaper is not pre-installed.");
+            return null;
+        }
+
+        final Bundle metaData = serviceInfo.metaData;
+        if (metaData != null) {
+            return metaData.getString(KEY_ACTION_DELETE_LIVE_WALLPAPER);
+        }
+        return null;
+    }
+
+    private boolean isPackagePreInstalled(ApplicationInfo info) {
+        if (info != null && (info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+            return true;
+        }
+        return false;
     }
 }

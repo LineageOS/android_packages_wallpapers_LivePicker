@@ -60,6 +60,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import androidx.annotation.Nullable;
+
 import java.io.IOException;
 
 public class LiveWallpaperPreview extends Activity {
@@ -75,6 +77,7 @@ public class LiveWallpaperPreview extends Activity {
     private String mPackageName;
     private Intent mWallpaperIntent;
     private Intent mSettingsIntent;
+    private Intent mDeleteIntent;
 
     private TextView mAttributionTitle;
     private TextView mAttributionSubtitle1;
@@ -98,10 +101,10 @@ public class LiveWallpaperPreview extends Activity {
             setResult(RESULT_CANCELED);
             finish();
         }
-        initUI(info);
+        initUI(info, null /* deleteAction */);
     }
 
-    protected void initUI(WallpaperInfo info) {
+    protected void initUI(WallpaperInfo info, @Nullable String deleteAction) {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
@@ -146,6 +149,12 @@ public class LiveWallpaperPreview extends Activity {
         mWallpaperConnection = new WallpaperConnection(mWallpaperIntent);
 
         populateAttributionPane(info);
+
+        if (!TextUtils.isEmpty(deleteAction)) {
+            mDeleteIntent = new Intent(deleteAction);
+            mDeleteIntent.setPackage(info.getPackageName());
+            mDeleteIntent.putExtra(EXTRA_LIVE_WALLPAPER_INFO, info);
+        }
     }
 
     private void populateAttributionPane(WallpaperInfo info) {
@@ -269,6 +278,7 @@ public class LiveWallpaperPreview extends Activity {
         menu.findItem(R.id.configure).setVisible(mSettingsIntent != null);
         menu.findItem(R.id.set_wallpaper).getActionView().setOnClickListener(
                 this::setLiveWallpaper);
+        menu.findItem(R.id.delete_wallpaper).setVisible(mDeleteIntent != null);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -317,6 +327,13 @@ public class LiveWallpaperPreview extends Activity {
         mWallpaperManager.setWallpaperOffsets(windowToken, 0.5f, 0.0f);
     }
 
+    private void deleteLiveWallpaper() {
+        if (mDeleteIntent != null) {
+            startService(mDeleteIntent);
+            finish();
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -325,6 +342,10 @@ public class LiveWallpaperPreview extends Activity {
             return true;
         } else if (id == R.id.set_wallpaper) {
             setLiveWallpaper(getWindow().getDecorView());
+            return true;
+        } else if (id == R.id.delete_wallpaper) {
+            // TODO(b/122505782): Need delete confirm dialog.
+            deleteLiveWallpaper();
             return true;
         } else if (id == android.R.id.home) {
             onBackPressed();
