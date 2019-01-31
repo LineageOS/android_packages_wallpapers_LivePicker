@@ -410,11 +410,23 @@ public class LiveWallpaperPreview extends Activity {
         mWallpaperManager.setWallpaperOffsets(windowToken, 0.5f /* xOffset */, 0.0f /* yOffset */);
     }
 
-    private void deleteLiveWallpaper() {
+    @VisibleForTesting
+    void deleteLiveWallpaper() {
         if (mDeleteIntent != null) {
             startService(mDeleteIntent);
             finish();
         }
+    }
+
+    private void showDeleteConfirmDialog() {
+        final AlertDialog alertDialog = new AlertDialog.Builder(this /* context */,
+                R.style.AlertDialogStyle)
+                .setMessage(R.string.delete_wallpaper_confirmation)
+                .setPositiveButton(R.string.delete_live_wallpaper,
+                        (dialog, which) -> deleteLiveWallpaper())
+                .setNegativeButton(android.R.string.cancel, null /* listener */)
+                .create();
+        alertDialog.show();
     }
 
     @Override
@@ -424,8 +436,7 @@ public class LiveWallpaperPreview extends Activity {
             startActivity(mSettingsIntent);
             return true;
         } else if (id == R.id.delete_wallpaper) {
-            // TODO(b/122505782): Need delete confirm dialog.
-            deleteLiveWallpaper();
+            showDeleteConfirmDialog();
             return true;
         } else if (id == android.R.id.home) {
             onBackPressed();

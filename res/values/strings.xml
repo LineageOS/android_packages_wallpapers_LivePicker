@@ -58,4 +58,7 @@
     <!-- Label for the 'Customize' tab of view pager in wallpaper preview activity.
          [CHAR_LIMIT=25] -->
     <string name="tab_customize">Customize</string>
+
+    <!-- Confirmation dialog. Shown after user selects to delete one wallpaper. [CHAR LIMIT=NONE]  -->
+    <string name="delete_wallpaper_confirmation">Delete this wallpaper?</string>
 </resources>
