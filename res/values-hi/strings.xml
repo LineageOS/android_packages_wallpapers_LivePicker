@@ -24,6 +24,8 @@
     <string name="live_wallpaper_picker_label" msgid="3218000114890071946">"लाइव वॉलपेपर"</string>
     <string name="live_wallpaper_preview_title" msgid="1130080613611954763">"एनीमेशन वाले वॉलपेपर की झलक"</string>
     <string name="configure_wallpaper" msgid="7396598925806288258">"सेटिंग…"</string>
+    <!-- no translation found for delete_live_wallpaper (5127205073129449497) -->
+    <skip />
     <string name="wallpaper_instructions" msgid="4215640646180727542">"वॉलपेपर सेट करें"</string>
     <string name="live_wallpaper_empty" msgid="4278728108785853407">"कोई एनीमेशन वाला वॉलपेपर नहीं."</string>
     <string name="set_live_wallpaper" msgid="2381437614949033266">"वॉलपेपर सेट करें"</string>

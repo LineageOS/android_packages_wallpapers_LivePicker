@@ -24,6 +24,8 @@
     <string name="live_wallpaper_picker_label" msgid="3218000114890071946">"لائیو وال پیپرز"</string>
     <string name="live_wallpaper_preview_title" msgid="1130080613611954763">"لائیو وال پیپر کا پیش منظر"</string>
     <string name="configure_wallpaper" msgid="7396598925806288258">"ترتیبات…"</string>
+    <!-- no translation found for delete_live_wallpaper (5127205073129449497) -->
+    <skip />
     <string name="wallpaper_instructions" msgid="4215640646180727542">"وال پیپر سیٹ کریں"</string>
     <string name="live_wallpaper_empty" msgid="4278728108785853407">"کوئی لائیو وال پیپرز نہیں ہیں۔"</string>
     <string name="set_live_wallpaper" msgid="2381437614949033266">"وال پیپر سیٹ کریں"</string>

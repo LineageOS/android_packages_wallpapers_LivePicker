@@ -30,6 +30,7 @@ import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources.NotFoundException;
+import android.graphics.Outline;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -42,27 +43,37 @@ import android.service.wallpaper.IWallpaperEngine;
 import android.service.wallpaper.IWallpaperService;
 import android.service.wallpaper.WallpaperService;
 import android.service.wallpaper.WallpaperSettingsActivity;
-import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.TabLayout;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.view.WindowManager.LayoutParams;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LiveData;
+import androidx.slice.Slice;
+import androidx.slice.widget.SliceLiveData;
+import androidx.slice.widget.SliceView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LiveWallpaperPreview extends Activity {
     static final String EXTRA_LIVE_WALLPAPER_INFO = "android.live_wallpaper.info";
@@ -74,19 +85,15 @@ public class LiveWallpaperPreview extends Activity {
     private WallpaperManager mWallpaperManager;
     private WallpaperConnection mWallpaperConnection;
 
-    private String mPackageName;
     private Intent mWallpaperIntent;
     private Intent mSettingsIntent;
     private Intent mDeleteIntent;
 
-    private TextView mAttributionTitle;
-    private TextView mAttributionSubtitle1;
-    private TextView mAttributionSubtitle2;
-    private Button mAttributionExploreButton;
-    private ImageButton mPreviewPaneArrow;
-    private View mBottomSheet;
-    private View mSpacer;
     private View mLoading;
+
+    protected final List<Pair<String, View>> mPages = new ArrayList<>();
+    private SliceView mSliceViewSettings;
+    private LiveData<Slice> mLiveDataSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,11 +102,10 @@ public class LiveWallpaperPreview extends Activity {
     }
 
     protected void init() {
-        Bundle extras = getIntent().getExtras();
-        WallpaperInfo info = extras.getParcelable(EXTRA_LIVE_WALLPAPER_INFO);
+        WallpaperInfo info = getIntent().getParcelableExtra(EXTRA_LIVE_WALLPAPER_INFO);
         if (info == null) {
-            setResult(RESULT_CANCELED);
             finish();
+            return;
         }
         initUI(info, null /* deleteAction */);
     }
@@ -109,24 +115,16 @@ public class LiveWallpaperPreview extends Activity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         setContentView(R.layout.live_wallpaper_preview);
-        mAttributionTitle = (TextView) findViewById(R.id.preview_attribution_pane_title);
-        mAttributionSubtitle1 = (TextView) findViewById(R.id.preview_attribution_pane_subtitle1);
-        mAttributionSubtitle2 = (TextView) findViewById(R.id.preview_attribution_pane_subtitle2);
-        mAttributionExploreButton = (Button) findViewById(
-                R.id.preview_attribution_pane_explore_button);
-        mPreviewPaneArrow = (ImageButton) findViewById(R.id.preview_attribution_pane_arrow);
-        mBottomSheet = findViewById(R.id.bottom_sheet);
-        mSpacer = findViewById(R.id.spacer);
         mLoading = findViewById(R.id.loading);
 
-        mPackageName = info.getPackageName();
+        final String packageName = info.getPackageName();
         mWallpaperIntent = new Intent(WallpaperService.SERVICE_INTERFACE)
                 .setClassName(info.getPackageName(), info.getServiceName());
 
         final String settingsActivity = info.getSettingsActivity();
         if (settingsActivity != null) {
             mSettingsIntent = new Intent();
-            mSettingsIntent.setComponent(new ComponentName(mPackageName, settingsActivity));
+            mSettingsIntent.setComponent(new ComponentName(packageName, settingsActivity));
             mSettingsIntent.putExtra(WallpaperSettingsActivity.EXTRA_PREVIEW_MODE, true);
             final PackageManager pm = getPackageManager();
             final ActivityInfo activityInfo = mSettingsIntent.resolveActivityInfo(pm, 0);
@@ -136,155 +134,237 @@ public class LiveWallpaperPreview extends Activity {
             }
         }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setActionBar(toolbar);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setDisplayShowTitleEnabled(false);
 
-        Drawable backArrow = getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp);
+        final Drawable backArrow = getDrawable(R.drawable.ic_arrow_back_white_24dp);
         backArrow.setAutoMirrored(true);
         toolbar.setNavigationIcon(backArrow);
 
         mWallpaperManager = WallpaperManager.getInstance(this);
         mWallpaperConnection = new WallpaperConnection(mWallpaperIntent);
 
-        populateAttributionPane(info);
-
         if (!TextUtils.isEmpty(deleteAction)) {
             mDeleteIntent = new Intent(deleteAction);
             mDeleteIntent.setPackage(info.getPackageName());
             mDeleteIntent.putExtra(EXTRA_LIVE_WALLPAPER_INFO, info);
         }
+
+        initInfoPage(info);
+        initSettingsPage(info);
+        populateBottomPane();
     }
 
-    private void populateAttributionPane(WallpaperInfo info) {
-        if (!info.getShowMetadataInPreview() && !SHOW_DUMMY_DATA) {
-            mBottomSheet.setVisibility(View.GONE);
-            return;
-        }
-        final BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
+    private void initInfoPage(WallpaperInfo info) {
+        final View pageInfo = getLayoutInflater().inflate(R.layout.page_info, null /* root */);
+        final TextView attributionTitle = pageInfo.findViewById(
+                R.id.preview_attribution_pane_title);
+        final TextView attributionAuthor = pageInfo.findViewById(
+                R.id.preview_attribution_pane_author);
+        final TextView attributionDescription = pageInfo.findViewById(
+                R.id.preview_attribution_pane_description);
+        final Button attributionExploreButton = pageInfo.findViewById(
+                R.id.preview_attribution_pane_explore_button);
+        final View spacer = pageInfo.findViewById(R.id.spacer);
+        final Button setWallpaperButton = pageInfo.findViewById(
+                R.id.preview_attribution_pane_set_wallpaper_button);
 
-        OnClickListener onClickListener = new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                } else if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
-            }
-        };
-        mAttributionTitle.setOnClickListener(onClickListener);
-        mPreviewPaneArrow.setOnClickListener(onClickListener);
-
-        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    mPreviewPaneArrow.setImageResource(R.drawable.ic_keyboard_arrow_up_white_24dp);
-                    mPreviewPaneArrow.setContentDescription(
-                            getResources().getString(R.string.expand_attribution_panel));
-                } else if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    mPreviewPaneArrow.setImageResource(
-                            R.drawable.ic_keyboard_arrow_down_white_24dp);
-                    mPreviewPaneArrow.setContentDescription(
-                            getResources().getString(R.string.collapse_attribution_panel));
-                }
-            }
-
-            @Override
-            public void onSlide(View bottomSheet, float slideOffset) {
-                float alpha;
-                if (slideOffset >= 0) {
-                    alpha = slideOffset;
-                } else {
-                    alpha = 1f - slideOffset;
-                }
-                mAttributionTitle.setAlpha(slideOffset);
-                mAttributionSubtitle1.setAlpha(slideOffset);
-                mAttributionSubtitle2.setAlpha(slideOffset);
-                mAttributionExploreButton.setAlpha(slideOffset);
-            }
-        });
-
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        mPreviewPaneArrow.setImageResource(R.drawable.ic_keyboard_arrow_down_white_24dp);
+        setWallpaperButton.setOnClickListener(this::setLiveWallpaper);
+        mPages.add(Pair.create(getString(R.string.tab_info), pageInfo));
 
         if (SHOW_DUMMY_DATA) {
-            mAttributionTitle.setText("Diorama, Yosemite");
-            mAttributionSubtitle1.setText("Live Earth Collection - Android Earth");
-            mAttributionSubtitle2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                    + " Sed imperdiet et mauris molestie laoreet. Proin volutpat elit nec magna"
-                    + " tempus, ac aliquet lectus volutpat.");
-            mAttributionExploreButton.setText("Explore");
-        } else {
-            PackageManager pm = getPackageManager();
+            attributionTitle.setText("Diorama, Yosemite");
+            attributionAuthor.setText("Live Earth Collection - Android Earth");
+            attributionAuthor.setVisibility(View.VISIBLE);
+            attributionDescription.setText("Lorem ipsum dolor sit amet, consectetur adipiscing"
+                    + " elit. Sed imperdiet et mauris molestie laoreet. Proin volutpat elit nec"
+                    + " magna tempus, ac aliquet lectus volutpat.");
+            attributionDescription.setVisibility(View.VISIBLE);
+            attributionExploreButton.setText("Explore");
+            attributionExploreButton.setVisibility(View.VISIBLE);
+            spacer.setVisibility(View.VISIBLE);
+            return;
+        }
 
-            CharSequence title = info.loadLabel(pm);
-            if (!TextUtils.isEmpty(title)) {
-                mAttributionTitle.setText(title);
-            } else {
-                mAttributionTitle.setVisibility(View.GONE);
+        final PackageManager pm = getPackageManager();
+
+        // Set attribution title
+        final CharSequence title = info.loadLabel(pm);
+        if (!TextUtils.isEmpty(title)) {
+            attributionTitle.setText(title);
+            attributionTitle.setVisibility(View.VISIBLE);
+        }
+
+        // Don't show other meta data if attribute showMetadataInPreview is set to False
+        if (!info.getShowMetadataInPreview()) {
+            return;
+        }
+
+        // Set attribution author
+        try {
+            final CharSequence author = info.loadAuthor(pm);
+            if (!TextUtils.isEmpty(author)) {
+                attributionAuthor.setText(author);
+                attributionAuthor.setVisibility(View.VISIBLE);
             }
+        } catch (NotFoundException e) {
+            // It's expected if the live wallpaper doesn't provide this information
+        }
 
-            try {
-                CharSequence author = info.loadAuthor(pm);
-                if (TextUtils.isEmpty(author)) {
-                    throw new NotFoundException();
-                }
-                mAttributionSubtitle1.setText(author);
-            } catch (NotFoundException e) {
-                mAttributionSubtitle1.setVisibility(View.GONE);
+        // Set attribution description
+        try {
+            final CharSequence description = info.loadDescription(pm);
+            if (!TextUtils.isEmpty(description)) {
+                attributionDescription.setText(description);
+                attributionDescription.setVisibility(View.VISIBLE);
             }
+        } catch (NotFoundException e) {
+            // It's expected if the live wallpaper doesn't provide this information
+        }
 
-            try {
-                CharSequence description = info.loadDescription(pm);
-                if (TextUtils.isEmpty(description)) {
-                    throw new NotFoundException();
-                }
-                mAttributionSubtitle2.setText(description);
-            } catch (NotFoundException e) {
-                mAttributionSubtitle2.setVisibility(View.GONE);
-            }
-
-            try {
-                Uri contextUri = info.loadContextUri(pm);
-                CharSequence contextDescription = info.loadContextDescription(pm);
-                if (contextUri == null) {
-                    throw new NotFoundException();
-                }
-                mAttributionExploreButton.setText(contextDescription);
-                mAttributionExploreButton.setOnClickListener(v -> {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, contextUri);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        // Set context information
+        try {
+            final Uri contextUri = info.loadContextUri(pm);
+            if (contextUri != null) {
+                final Intent intent = new Intent(Intent.ACTION_VIEW, contextUri);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                attributionExploreButton.setOnClickListener(v -> {
                     try {
                         startActivity(intent);
                     } catch (ActivityNotFoundException e) {
                         Log.e(LOG_TAG, "Couldn't find activity for context link.", e);
                     }
                 });
-            } catch (NotFoundException e) {
-                mAttributionExploreButton.setVisibility(View.GONE);
-                mSpacer.setVisibility(View.VISIBLE);
+                attributionExploreButton.setVisibility(View.VISIBLE);
+                spacer.setVisibility(View.VISIBLE);
+
+                // Update context description string if it's provided
+                final CharSequence contextDescription = info.loadContextDescription(pm);
+                if (!TextUtils.isEmpty(contextDescription)) {
+                    attributionExploreButton.setText(contextDescription);
+                }
             }
+        } catch (NotFoundException e) {
+            // It's expected if the wallpaper doesn't provide this information
+        }
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    protected Uri getSettingsSliceUri(@NonNull WallpaperInfo info) {
+        return info.getSettingsSliceUri();
+    }
+
+    private void initSettingsPage(WallpaperInfo info) {
+        final Uri uriSettingsSlice = getSettingsSliceUri(info);
+        if (uriSettingsSlice == null) {
+            return;
         }
 
+        final View pageSettings = getLayoutInflater().inflate(R.layout.page_settings,
+                null /* root */);
+        final Button setWallpaperButton = pageSettings.findViewById(
+                R.id.preview_attribution_pane_set_wallpaper_button);
 
+        mSliceViewSettings = pageSettings.findViewById(R.id.settings_slice);
+        mSliceViewSettings.setMode(SliceView.MODE_LARGE);
+        mSliceViewSettings.setScrollable(false);
+
+        // Set LiveData for SliceView
+        mLiveDataSettings = SliceLiveData.fromUri(this /* context */, uriSettingsSlice);
+        mLiveDataSettings.observeForever(mSliceViewSettings);
+
+        setWallpaperButton.setOnClickListener(this::setLiveWallpaper);
+
+        mPages.add(Pair.create(getResources().getString(R.string.tab_customize), pageSettings));
+    }
+
+    private void populateBottomPane() {
+        final View viewBottomPane = findViewById(R.id.bottom_pane);
+        final ViewPager viewPager = findViewById(R.id.viewpager);
+        final TabLayout tabLayout = findViewById(R.id.tablayout);
+
+        // Create PagerAdapter
+        final PagerAdapter pagerAdapter = new PagerAdapter() {
+            @NonNull
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                final View page = mPages.get(position).second;
+                container.addView(page);
+                return page;
+            }
+
+            @Override
+            public void destroyItem(@NonNull ViewGroup container, int position,
+                    @NonNull Object object) {
+                if (object instanceof View) {
+                    container.removeView((View) object);
+                }
+            }
+
+            @Override
+            public int getCount() {
+                return mPages.size();
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                try {
+                    return mPages.get(position).first;
+                } catch (IndexOutOfBoundsException e) {
+                    return null;
+                }
+            }
+
+            @Override
+            public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+                return (view == object);
+            }
+        };
+
+        // Add OnPageChangeListener to re-measure ViewPager's height
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                viewPager.requestLayout();
+            }
+        });
+
+        // Set PagerAdapter
+        viewPager.setAdapter(pagerAdapter);
+
+        // Make TabLayout visible if there are more than one page
+        if (mPages.size() > 1) {
+            tabLayout.setVisibility(View.VISIBLE);
+            tabLayout.setupWithViewPager(viewPager);
+        }
+
+        // Initializes a rounded rectangle outline and clips the upper corners to be rounded.
+        viewBottomPane.setOutlineProvider(new ViewOutlineProvider() {
+            private final int radius = getResources().getDimensionPixelSize(
+                    R.dimen.preview_viewpager_round_radius);
+
+            @Override
+            public void getOutline(View view, Outline outline) {
+                outline.setRoundRect(0 /* left */, 0 /* top */, view.getWidth(),
+                        view.getHeight() + radius, radius);
+            }
+        });
+        viewBottomPane.setClipToOutline(true);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_preview, menu);
         menu.findItem(R.id.configure).setVisible(mSettingsIntent != null);
-        menu.findItem(R.id.set_wallpaper).getActionView().setOnClickListener(
-                this::setLiveWallpaper);
         menu.findItem(R.id.delete_wallpaper).setVisible(mDeleteIntent != null);
         return super.onCreateOptionsMenu(menu);
     }
 
     public void setLiveWallpaper(final View v) {
         if (mWallpaperManager.getWallpaperInfo() != null
-            && mWallpaperManager.getWallpaperId(WallpaperManager.FLAG_LOCK) < 0) {
+                && mWallpaperManager.getWallpaperId(WallpaperManager.FLAG_LOCK) < 0) {
             // The lock screen does not have a distinct wallpaper and the current wallpaper is a
             // live wallpaper, so since we cannot preserve any static imagery on the lock screen,
             // set the live wallpaper directly without giving the user a destination option.
@@ -297,34 +377,37 @@ public class LiveWallpaperPreview extends Activity {
             finish();
         } else {
             // Otherwise, prompt to either set on home or both home and lock screen.
-            Context themedContext = new ContextThemeWrapper(this, android.R.style.Theme_DeviceDefault_Settings);
+            final Context themedContext = new ContextThemeWrapper(this /* base */,
+                    android.R.style.Theme_DeviceDefault_Settings);
             new AlertDialog.Builder(themedContext)
                     .setTitle(R.string.set_live_wallpaper)
-                    .setAdapter(new WallpaperTargetAdapter(themedContext), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            try {
-                                setLiveWallpaper(v.getRootView().getWindowToken());
-                                if (which == 1) {
-                                    // "Home screen and lock screen"; clear the lock screen so it
-                                    // shows through to the live wallpaper on home.
-                                    mWallpaperManager.clear(WallpaperManager.FLAG_LOCK);
+                    .setAdapter(new WallpaperTargetAdapter(themedContext),
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    try {
+                                        setLiveWallpaper(v.getRootView().getWindowToken());
+                                        if (which == 1) {
+                                            // "Home screen and lock screen"; clear the lock
+                                            // screen so it
+                                            // shows through to the live wallpaper on home.
+                                            mWallpaperManager.clear(WallpaperManager.FLAG_LOCK);
+                                        }
+                                        setResult(RESULT_OK);
+                                    } catch (RuntimeException | IOException e) {
+                                        Log.w(LOG_TAG, "Failure setting wallpaper", e);
+                                    }
+                                    finish();
                                 }
-                                setResult(RESULT_OK);
-                            } catch (RuntimeException|IOException e) {
-                                Log.w(LOG_TAG, "Failure setting wallpaper", e);
-                            }
-                            finish();
-                        }
-                    })
+                            })
                     .show();
         }
     }
 
     private void setLiveWallpaper(IBinder windowToken) {
         mWallpaperManager.setWallpaperComponent(mWallpaperIntent.getComponent());
-        mWallpaperManager.setWallpaperOffsetSteps(0.5f, 0.0f);
-        mWallpaperManager.setWallpaperOffsets(windowToken, 0.5f, 0.0f);
+        mWallpaperManager.setWallpaperOffsetSteps(0.5f /* xStep */, 0.0f /* yStep */);
+        mWallpaperManager.setWallpaperOffsets(windowToken, 0.5f /* xOffset */, 0.0f /* yOffset */);
     }
 
     private void deleteLiveWallpaper() {
@@ -339,9 +422,6 @@ public class LiveWallpaperPreview extends Activity {
         int id = item.getItemId();
         if (id == R.id.configure) {
             startActivity(mSettingsIntent);
-            return true;
-        } else if (id == R.id.set_wallpaper) {
-            setLiveWallpaper(getWindow().getDecorView());
             return true;
         } else if (id == R.id.delete_wallpaper) {
             // TODO(b/122505782): Need delete confirm dialog.
@@ -365,7 +445,7 @@ public class LiveWallpaperPreview extends Activity {
             }
         }
     }
-    
+
     @Override
     public void onPause() {
         super.onPause();
@@ -394,11 +474,20 @@ public class LiveWallpaperPreview extends Activity {
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        
+
         if (mWallpaperConnection != null) {
             mWallpaperConnection.disconnect();
         }
         mWallpaperConnection = null;
+    }
+
+    @Override
+    protected void onDestroy () {
+        if (mLiveDataSettings != null && mLiveDataSettings.hasObservers()) {
+            mLiveDataSettings.removeObserver(mSliceViewSettings);
+            mLiveDataSettings = null;
+        }
+        super.onDestroy();
     }
 
     @Override
@@ -410,7 +499,7 @@ public class LiveWallpaperPreview extends Activity {
             } catch (RemoteException e) {
             }
         }
-        
+
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             onUserInteraction();
         }
@@ -437,7 +526,7 @@ public class LiveWallpaperPreview extends Activity {
         }
         return handled;
     }
-    
+
     class WallpaperConnection extends IWallpaperConnection.Stub implements ServiceConnection {
         final Intent mIntent;
         IWallpaperService mService;
@@ -503,7 +592,7 @@ public class LiveWallpaperPreview extends Activity {
                 Log.w(LOG_TAG, "Wallpaper service gone: " + name);
             }
         }
-        
+
         public void attachEngine(IWallpaperEngine engine, int displayId) {
             synchronized (this) {
                 if (mConnected) {

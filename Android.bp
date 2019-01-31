@@ -22,7 +22,7 @@ prebuilt_etc {
 
 android_app {
     name: "LiveWallpapersPicker",
-    srcs: ["**/*.java"],
+    srcs: ["src/**/*.java"],
     required: ["android.software.live_wallpaper.xml"],
     platform_apis: true,
     certificate: "platform",
@@ -39,6 +39,8 @@ android_app {
         "androidx.design_design",
         "androidx.transition_transition",
         "androidx.recyclerview_recyclerview",
+        "androidx.slice_slice-core",
+        "androidx.slice_slice-view",
     ],
     resource_dirs: ["res"],
 }

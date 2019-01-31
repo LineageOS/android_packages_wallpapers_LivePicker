@@ -24,6 +24,8 @@
     <string name="live_wallpaper_picker_label" msgid="3218000114890071946">"සජීවී වෝල්පේපර්"</string>
     <string name="live_wallpaper_preview_title" msgid="1130080613611954763">"සජීවී වෝල්පේපර පෙරදසුන"</string>
     <string name="configure_wallpaper" msgid="7396598925806288258">"සැකසීම්..."</string>
+    <!-- no translation found for delete_live_wallpaper (5127205073129449497) -->
+    <skip />
     <string name="wallpaper_instructions" msgid="4215640646180727542">"වෝල්පේපරය සකසන්න"</string>
     <string name="live_wallpaper_empty" msgid="4278728108785853407">"සජීවී වෝල්පේපර් නැත."</string>
     <string name="set_live_wallpaper" msgid="2381437614949033266">"වෝල්පේපරය සකසන්න"</string>
