@@ -36,7 +36,7 @@ android_app {
         "androidx.legacy_legacy-support-core-utils",
         "androidx.legacy_legacy-support-core-ui",
         "androidx.fragment_fragment",
-        "androidx.design_design",
+        "com.google.android.material_material",
         "androidx.transition_transition",
         "androidx.recyclerview_recyclerview",
         "androidx.slice_slice-core",

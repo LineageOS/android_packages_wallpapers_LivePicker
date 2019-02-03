@@ -24,8 +24,7 @@
     <string name="live_wallpaper_picker_label" msgid="3218000114890071946">"Liikuvad taustapildid"</string>
     <string name="live_wallpaper_preview_title" msgid="1130080613611954763">"Liikuva taustapildi eelvaade"</string>
     <string name="configure_wallpaper" msgid="7396598925806288258">"Seaded ..."</string>
-    <!-- no translation found for delete_live_wallpaper (5127205073129449497) -->
-    <skip />
+    <string name="delete_live_wallpaper" msgid="5127205073129449497">"Kustuta"</string>
     <string name="wallpaper_instructions" msgid="4215640646180727542">"Määra taustapilt"</string>
     <string name="live_wallpaper_empty" msgid="4278728108785853407">"Pole liikuvaid taustapilte."</string>
     <string name="set_live_wallpaper" msgid="2381437614949033266">"Määra taustapilt"</string>
@@ -33,6 +32,9 @@
     <string name="live_wallpaper_loading" msgid="2488371303130330734">"Liikuva taustapildi laadimine ..."</string>
     <string name="which_wallpaper_option_home_screen" msgid="6592329803583957023">"Avaekraan"</string>
     <string name="which_wallpaper_option_home_screen_and_lock_screen" msgid="6170359719231147447">"Avaekraan ja lukustuskuva"</string>
-    <string name="collapse_attribution_panel" msgid="4998500891743118630">"Taustapildi teabepaneeli ahendamine"</string>
-    <string name="expand_attribution_panel" msgid="3151357815478885438">"Taustapildi teabepaneeli laiendamine"</string>
+    <string name="explore_further" msgid="2891466461738034935">"Avastage"</string>
+    <string name="tab_info" msgid="2612717074705274392">"Teave"</string>
+    <string name="tab_customize" msgid="5282247400178296263">"Kohandamine"</string>
+    <!-- no translation found for delete_wallpaper_confirmation (4470215991866743220) -->
+    <skip />
 </resources>

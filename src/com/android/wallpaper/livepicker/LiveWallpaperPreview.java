@@ -43,7 +43,7 @@ import android.service.wallpaper.IWallpaperEngine;
 import android.service.wallpaper.IWallpaperService;
 import android.service.wallpaper.WallpaperService;
 import android.service.wallpaper.WallpaperSettingsActivity;
-import android.support.design.widget.TabLayout;
+import com.google.android.material.tabs.TabLayout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
