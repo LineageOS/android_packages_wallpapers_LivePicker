@@ -32,12 +32,9 @@
     <string name="live_wallpaper_loading" msgid="2488371303130330734">"لائیو وال پیپر لوڈ ہو رہا ہے…"</string>
     <string name="which_wallpaper_option_home_screen" msgid="6592329803583957023">"ہوم اسکرین"</string>
     <string name="which_wallpaper_option_home_screen_and_lock_screen" msgid="6170359719231147447">"ہوم اسکرین اور مقفل اسکرین"</string>
-    <!-- no translation found for explore_further (2891466461738034935) -->
-    <skip />
-    <!-- no translation found for tab_info (2612717074705274392) -->
-    <skip />
-    <!-- no translation found for tab_customize (5282247400178296263) -->
-    <skip />
+    <string name="explore_further" msgid="2891466461738034935">"دریافت کریں"</string>
+    <string name="tab_info" msgid="2612717074705274392">"معلومات"</string>
+    <string name="tab_customize" msgid="5282247400178296263">"حسب ضرورت بنائیں"</string>
     <!-- no translation found for delete_wallpaper_confirmation (4470215991866743220) -->
     <skip />
 </resources>

@@ -32,12 +32,9 @@
     <string name="live_wallpaper_loading" msgid="2488371303130330734">"ଲାଇଭ୍‌ ୱାଲପେପରଗୁଡ଼ିକୁ ଲୋଡ୍‌ କରାଯାଉଛି..."</string>
     <string name="which_wallpaper_option_home_screen" msgid="6592329803583957023">"ହୋମ୍‌ ସ୍କ୍ରୀନ୍‌"</string>
     <string name="which_wallpaper_option_home_screen_and_lock_screen" msgid="6170359719231147447">"ହୋମ୍‌ ସ୍କ୍ରୀନ୍‌ ଏବଂ ଲକ୍‌ ସ୍କ୍ରୀନ୍‌"</string>
-    <!-- no translation found for explore_further (2891466461738034935) -->
-    <skip />
-    <!-- no translation found for tab_info (2612717074705274392) -->
-    <skip />
-    <!-- no translation found for tab_customize (5282247400178296263) -->
-    <skip />
+    <string name="explore_further" msgid="2891466461738034935">"ଏକ୍ସପ୍ଲୋର୍ କରନ୍ତୁ"</string>
+    <string name="tab_info" msgid="2612717074705274392">"ସୂଚନା"</string>
+    <string name="tab_customize" msgid="5282247400178296263">"କଷ୍ଟମାଇଜ୍ କରନ୍ତୁ"</string>
     <!-- no translation found for delete_wallpaper_confirmation (4470215991866743220) -->
     <skip />
 </resources>

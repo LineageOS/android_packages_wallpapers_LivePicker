@@ -32,12 +32,9 @@
     <string name="live_wallpaper_loading" msgid="2488371303130330734">"நேரலை வால்பேப்பரை ஏற்றுகிறது…"</string>
     <string name="which_wallpaper_option_home_screen" msgid="6592329803583957023">"முகப்புத் திரை"</string>
     <string name="which_wallpaper_option_home_screen_and_lock_screen" msgid="6170359719231147447">"முகப்புத் திரையும் லாக் ஸ்கிரீனும்"</string>
-    <!-- no translation found for explore_further (2891466461738034935) -->
-    <skip />
-    <!-- no translation found for tab_info (2612717074705274392) -->
-    <skip />
-    <!-- no translation found for tab_customize (5282247400178296263) -->
-    <skip />
+    <string name="explore_further" msgid="2891466461738034935">"கண்டறி"</string>
+    <string name="tab_info" msgid="2612717074705274392">"தகவல்"</string>
+    <string name="tab_customize" msgid="5282247400178296263">"தனிப்பயனாக்கு"</string>
     <!-- no translation found for delete_wallpaper_confirmation (4470215991866743220) -->
     <skip />
 </resources>
