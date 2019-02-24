@@ -35,6 +35,5 @@
     <string name="explore_further" msgid="2891466461738034935">"探索"</string>
     <string name="tab_info" msgid="2612717074705274392">"資料"</string>
     <string name="tab_customize" msgid="5282247400178296263">"自訂"</string>
-    <!-- no translation found for delete_wallpaper_confirmation (4470215991866743220) -->
-    <skip />
+    <string name="delete_wallpaper_confirmation" msgid="4470215991866743220">"要刪除此桌布嗎？"</string>
 </resources>
