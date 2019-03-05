@@ -25,8 +25,8 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
 /**
- * When ConstraintViewPager is being measured, it will calculate height of the currently selected
- * page and makes itself be the same height exactly.
+ * When ConstraintViewPager is being measured, it will get all height of pages and makes itself
+ * height as the same as the maximum height.
  */
 public class ConstraintViewPager extends ViewPager {
 
@@ -39,20 +39,24 @@ public class ConstraintViewPager extends ViewPager {
     }
 
     /**
-     * Calculates the measured height of the selected page and makes itself be the same height.
+     * Visit all child views first and then determine the maximum height for ViewPager.
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        final View pageView = getChildAt(getCurrentItem());
-        if (pageView != null) {
-            pageView.measure(widthMeasureSpec,
+        int maxChildHeight = 0;
+        for (int i = 0; i < getChildCount(); i++) {
+            View view = getChildAt(i);
+            view.measure(widthMeasureSpec,
                     MeasureSpec.makeMeasureSpec(0 /* size */, MeasureSpec.UNSPECIFIED));
-            if (pageView.getMeasuredHeight() != 0) {
-                heightMeasureSpec = MeasureSpec.makeMeasureSpec(pageView.getMeasuredHeight(),
-                        MeasureSpec.EXACTLY);
+            int childHeight = view.getMeasuredHeight();
+            if (childHeight > maxChildHeight) {
+                maxChildHeight = childHeight;
             }
         }
 
+        if (maxChildHeight != 0) {
+            heightMeasureSpec = MeasureSpec.makeMeasureSpec(maxChildHeight, MeasureSpec.EXACTLY);
+        }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }
