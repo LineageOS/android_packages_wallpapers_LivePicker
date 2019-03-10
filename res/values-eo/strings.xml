@@ -18,24 +18,6 @@
 */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- General -->
-  <!-- Application name -->
-  <!-- Title for the screen that lets the user choose a live wallpaper to use
-         for the system. -->
-  <!-- Label for the live wallpaper picker [CHAR_LIMIT=40]-->
-  <!-- Title for the screen that lets the user preview a live wallpaper. -->
-  <!-- List item for configuring the current wallpaper -->
-  <string name="configure_wallpaper">Agordoj&#8230;</string>
-  <!-- Button label on Wallpaper Gallery screen; user selects this button to set a specific wallpaper -->
-  <!-- Warning message, no live wallpapers available. -->
-  <!-- Button label, action, sets the currently selected wallpaper. -->
-  <!-- Label, title and author of the live wallpaper -->
-  <string name="wallpaper_title_and_author"><xliff:g id="title" example="Galaxy">%1$s</xliff:g> de <xliff:g id="author" example="Google">%2$s</xliff:g></string>
-  <!-- Message, tells the user the selected live wallpaper is loading. -->
-  <!-- Option for setting the wallpaper only on the home screen. -->
-  <!-- Option for setting the wallpaper on both the home screen and lock screen. -->
-  <!-- Content description for a button letting the user collapse a visual panel showing info
-         about the wallpaper being previewed. [CHAR LIMIT=none] -->
-  <!-- Content description for a button letting the user expand a visual panel showing info about
-         the wallpaper being previewed. [CHAR LIMIT=none] -->
+    <string name="configure_wallpaper">Agordoj…</string>
+    <string name="wallpaper_title_and_author"><xliff:g id="title" example="Galaxy">%1$s</xliff:g> de <xliff:g id="author" example="Google">%2$s</xliff:g></string>
 </resources>
