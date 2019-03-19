@@ -35,6 +35,12 @@
 
     </FrameLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/preview_gradient_background_height"
+        android:layout_gravity="top"
+        android:background="@drawable/gradient_background"/>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,18 +51,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/translucent_black"
+            android:background="@color/translucent_blue_light"
             android:orientation="vertical">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tablayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabTextAppearance="@style/LivePicker.TextAppearance.Tab.NoAllCaps"
-                app:tabIndicatorColor="?android:attr/textColorPrimary"
-                app:tabGravity="fill"
-                app:tabMaxWidth="0dp"
-                android:visibility="gone"/>
+                style="@style/TabLayoutStyle"
+                android:visibility="gone" />
 
             <com.android.wallpaper.livepicker.widget.ConstraintViewPager
                 android:id="@+id/viewpager"

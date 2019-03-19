@@ -17,20 +17,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingHorizontal="@dimen/preview_attribution_pane_horizontal_padding"
-    android:paddingVertical="@dimen/preview_attribution_pane_vertical_padding">
+    android:paddingHorizontal="@dimen/preview_attribution_pane_horizontal_padding">
 
     <androidx.slice.widget.SliceView
         android:id="@+id/settings_slice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/preview_attribution_pane_set_wallpaper_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/preview_attribution_pane_explore_top_margin"
-        style="@style/LivePicker.Button.Colored"
+        style="@style/UnelevatedButtonStyle"
         android:text="@string/set_live_wallpaper"/>
 
 </LinearLayout>

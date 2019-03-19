@@ -28,8 +28,7 @@
         android:forceHasOverlappingRendering="false"
         android:gravity="center_horizontal"
         android:singleLine="true"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        android:textSize="@dimen/abc_text_size_subhead_material"
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Title"
         android:visibility="gone"/>
 
     <TextView
@@ -39,8 +38,7 @@
         android:layout_marginTop="@dimen/preview_attribution_pane_author_top_margin"
         android:forceHasOverlappingRendering="false"
         android:gravity="center_horizontal"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
         android:visibility="gone"/>
 
     <TextView
@@ -50,8 +48,7 @@
         android:layout_marginTop="@dimen/preview_attribution_pane_description_top_margin"
         android:forceHasOverlappingRendering="false"
         android:gravity="center_horizontal"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-        android:textSize="@dimen/abc_text_size_caption_material"
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Caption"
         android:visibility="gone"/>
 
     <LinearLayout
@@ -61,11 +58,11 @@
         android:layout_marginTop="@dimen/preview_attribution_pane_explore_top_margin"
         android:orientation="horizontal">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/preview_attribution_pane_explore_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/LivePicker.Button.Outlined"
+            style="@style/OutlinedButtonStyle"
             android:text="@string/explore_further"
             android:visibility="gone"/>
 
@@ -76,11 +73,11 @@
             android:layout_weight="1"
             android:visibility="gone"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/preview_attribution_pane_set_wallpaper_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/LivePicker.Button.Colored"
+            style="@style/UnelevatedButtonStyle"
             android:text="@string/set_live_wallpaper"/>
 
     </LinearLayout>

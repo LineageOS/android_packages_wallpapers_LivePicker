@@ -29,8 +29,11 @@
     <dimen name="preview_toolbar_start_padding">0dp</dimen>
     <dimen name="preview_toolbar_end_padding">12dp</dimen>
 
+    <!-- Dimensions for the gradient area.  -->
+    <dimen name="preview_gradient_background_height">128dp</dimen>
+
     <!-- Dimensions for the preview attribution pane. -->
-    <dimen name="preview_attribution_pane_horizontal_padding">16dp</dimen>
+    <dimen name="preview_attribution_pane_horizontal_padding">24dp</dimen>
     <dimen name="preview_attribution_pane_vertical_padding">13dp</dimen>
     <dimen name="preview_attribution_pane_author_top_margin">12dp</dimen>
     <dimen name="preview_attribution_pane_description_top_margin">2dp</dimen>
