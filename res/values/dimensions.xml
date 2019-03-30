@@ -41,8 +41,4 @@
 
     <!-- Dimensions for the ConstraintViewPager on preview activity. -->
     <dimen name="preview_viewpager_round_radius">12dp</dimen>
-
-    <!-- Dimensions for the button. -->
-    <dimen name="btn_corner_radius">4dp</dimen>
-    <dimen name="btn_outlined_stroke">1dp</dimen>
 </resources>
