@@ -35,5 +35,6 @@
     <string name="explore_further" msgid="2891466461738034935">"สำรวจ"</string>
     <string name="tab_info" msgid="2612717074705274392">"ข้อมูล"</string>
     <string name="tab_customize" msgid="5282247400178296263">"ปรับแต่ง"</string>
-    <string name="delete_wallpaper_confirmation" msgid="4470215991866743220">"ลบวอลเปเปอร์นี้ใช่ไหม"</string>
+    <!-- no translation found for delete_wallpaper_confirmation (6449356646369781400) -->
+    <skip />
 </resources>

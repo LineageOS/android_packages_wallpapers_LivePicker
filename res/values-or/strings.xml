@@ -35,5 +35,6 @@
     <string name="explore_further" msgid="2891466461738034935">"ଏକ୍ସପ୍ଲୋର୍ କରନ୍ତୁ"</string>
     <string name="tab_info" msgid="2612717074705274392">"ସୂଚନା"</string>
     <string name="tab_customize" msgid="5282247400178296263">"କଷ୍ଟମାଇଜ୍ କରନ୍ତୁ"</string>
-    <string name="delete_wallpaper_confirmation" msgid="4470215991866743220">"ଏହି ୱାଲ୍‍‍ପେପର୍ ଡିଲିଟ୍ କରିବେ?"</string>
+    <!-- no translation found for delete_wallpaper_confirmation (6449356646369781400) -->
+    <skip />
 </resources>

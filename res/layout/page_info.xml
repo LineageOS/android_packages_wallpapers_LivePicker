@@ -77,7 +77,7 @@
             android:id="@+id/preview_attribution_pane_set_wallpaper_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/UnelevatedButtonStyle"
+            style="@style/ButtonStyle"
             android:text="@string/set_live_wallpaper"/>
 
     </LinearLayout>
