@@ -35,6 +35,5 @@
     <string name="explore_further" msgid="2891466461738034935">"एक्सप्लोर करा"</string>
     <string name="tab_info" msgid="2612717074705274392">"माहिती"</string>
     <string name="tab_customize" msgid="5282247400178296263">"कस्टमाइझ करा"</string>
-    <!-- no translation found for delete_wallpaper_confirmation (6449356646369781400) -->
-    <skip />
+    <string name="delete_wallpaper_confirmation" msgid="6449356646369781400">"तुमच्या फोनवरून हा वॉलपेपर हटवायचा?"</string>
 </resources>

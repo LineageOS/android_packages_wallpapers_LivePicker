@@ -35,6 +35,5 @@
     <string name="explore_further" msgid="2891466461738034935">"살펴보기"</string>
     <string name="tab_info" msgid="2612717074705274392">"정보"</string>
     <string name="tab_customize" msgid="5282247400178296263">"맞춤설정"</string>
-    <!-- no translation found for delete_wallpaper_confirmation (6449356646369781400) -->
-    <skip />
+    <string name="delete_wallpaper_confirmation" msgid="6449356646369781400">"휴대전화에서 이 배경화면을 삭제하시겠습니까?"</string>
 </resources>
