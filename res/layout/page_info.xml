@@ -15,29 +15,35 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/page_info"
     android:orientation="vertical"
-    android:paddingHorizontal="@dimen/preview_attribution_pane_horizontal_padding"
-    android:paddingVertical="@dimen/preview_attribution_pane_vertical_padding">
+    android:paddingHorizontal="@dimen/preview_attribution_pane_horizontal_padding">
+
+    <Space
+        android:id="@+id/preview_attribution_pane_title_spacer"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/preview_attribution_pane_inner_spacer_height"/>
 
     <TextView
         android:id="@+id/preview_attribution_pane_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
+        android:minHeight="@dimen/preview_attribution_pane_title_height"
         android:ellipsize="end"
         android:forceHasOverlappingRendering="false"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:singleLine="true"
-        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Title"
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.SearchResult.Title"
         android:visibility="gone"/>
 
     <TextView
         android:id="@+id/preview_attribution_pane_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="@dimen/preview_attribution_pane_author_height"
         android:layout_marginTop="@dimen/preview_attribution_pane_author_top_margin"
         android:forceHasOverlappingRendering="false"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
         android:visibility="gone"/>
 
@@ -45,17 +51,24 @@
         android:id="@+id/preview_attribution_pane_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/preview_attribution_pane_description_top_margin"
+        android:minHeight="@dimen/preview_attribution_pane_description_height"
         android:forceHasOverlappingRendering="false"
         android:gravity="center_horizontal"
         android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Caption"
         android:visibility="gone"/>
 
+    <Space
+        android:id="@+id/preview_attribution_pane_spacer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/preview_attribution_pane_inner_spacer_height"
+        android:layout_weight="1"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="@dimen/preview_attribution_pane_explore_top_margin"
+        android:layout_marginBottom="@dimen/preview_attribution_pane_button_bottom_margin"
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton

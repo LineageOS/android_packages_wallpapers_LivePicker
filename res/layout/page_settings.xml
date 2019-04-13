@@ -24,10 +24,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <Space
+        android:id="@+id/preview_attribution_pane_spacer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/preview_attribution_pane_set_wallpaper_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/preview_attribution_pane_button_bottom_margin"
         style="@style/ButtonStyle"
         android:text="@string/set_live_wallpaper"/>
 

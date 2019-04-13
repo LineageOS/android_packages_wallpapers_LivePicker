@@ -24,11 +24,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
+import com.android.wallpaper.livepicker.R;
+
 /**
  * When ConstraintViewPager is being measured, it will get all height of pages and makes itself
  * height as the same as the maximum height.
  */
 public class ConstraintViewPager extends ViewPager {
+
+    private final int mExtraSpacerHeight;
 
     public ConstraintViewPager(@NonNull Context context) {
         this(context, null /* attrs */);
@@ -36,21 +40,44 @@ public class ConstraintViewPager extends ViewPager {
 
     public ConstraintViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        mExtraSpacerHeight = context.getResources().getDimensionPixelSize(
+                R.dimen.preview_attribution_pane_extra_spacer_height);
     }
 
     /**
      * Visit all child views first and then determine the maximum height for ViewPager.
+     * Info page will add extra height in top area determined by empty space.
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int maxChildHeight = 0;
+        int infoChildHeight = 0;
+        int infoTopPadding = 0;
+        View infoPage = null;
         for (int i = 0; i < getChildCount(); i++) {
             View view = getChildAt(i);
             view.measure(widthMeasureSpec,
                     MeasureSpec.makeMeasureSpec(0 /* size */, MeasureSpec.UNSPECIFIED));
             int childHeight = view.getMeasuredHeight();
+            // Get info page height and top padding.
+            if (view.getId() == R.id.page_info) {
+                infoPage = view;
+                infoChildHeight = childHeight;
+                infoTopPadding = view.getPaddingTop();
+            }
             if (childHeight > maxChildHeight) {
                 maxChildHeight = childHeight;
+            }
+        }
+
+        // Add extra padding in info page top area if info page has enough empty space to
+        // accommodate above and below extra height.
+        // 1. "infoChildHeight - infoTopPadding" means info page height without extra padding.
+        // 2. "mExtraSpacerHeight * 2" means above and below extra height.
+        if (maxChildHeight > (infoChildHeight - infoTopPadding + mExtraSpacerHeight * 2)) {
+            if (infoPage != null && infoTopPadding != mExtraSpacerHeight) {
+                infoPage.setPadding(infoPage.getPaddingLeft(), mExtraSpacerHeight,
+                        infoPage.getPaddingRight(), infoPage.getPaddingBottom());
             }
         }
 

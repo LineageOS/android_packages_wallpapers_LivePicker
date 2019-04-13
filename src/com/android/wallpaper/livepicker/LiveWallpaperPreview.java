@@ -176,6 +176,7 @@ public class LiveWallpaperPreview extends Activity {
 
         if (SHOW_DUMMY_DATA) {
             attributionTitle.setText("Diorama, Yosemite");
+            attributionTitle.setVisibility(View.VISIBLE);
             attributionAuthor.setText("Live Earth Collection - Android Earth");
             attributionAuthor.setVisibility(View.VISIBLE);
             attributionDescription.setText("Lorem ipsum dolor sit amet, consectetur adipiscing"

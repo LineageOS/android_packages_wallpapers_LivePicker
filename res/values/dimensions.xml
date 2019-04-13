@@ -34,10 +34,13 @@
 
     <!-- Dimensions for the preview attribution pane. -->
     <dimen name="preview_attribution_pane_horizontal_padding">24dp</dimen>
-    <dimen name="preview_attribution_pane_vertical_padding">13dp</dimen>
-    <dimen name="preview_attribution_pane_author_top_margin">12dp</dimen>
-    <dimen name="preview_attribution_pane_description_top_margin">2dp</dimen>
-    <dimen name="preview_attribution_pane_explore_top_margin">12dp</dimen>
+    <dimen name="preview_attribution_pane_extra_spacer_height">16dp</dimen>
+    <dimen name="preview_attribution_pane_inner_spacer_height">14dp</dimen>
+    <dimen name="preview_attribution_pane_title_height">48dp</dimen>
+    <dimen name="preview_attribution_pane_author_height">24dp</dimen>
+    <dimen name="preview_attribution_pane_author_top_margin">0dp</dimen>
+    <dimen name="preview_attribution_pane_description_height">34dp</dimen>
+    <dimen name="preview_attribution_pane_button_bottom_margin">8dp</dimen>
 
     <!-- Dimensions for the ConstraintViewPager on preview activity. -->
     <dimen name="preview_viewpager_round_radius">12dp</dimen>
