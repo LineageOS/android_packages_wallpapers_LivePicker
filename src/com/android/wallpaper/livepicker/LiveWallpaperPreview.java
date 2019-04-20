@@ -504,14 +504,6 @@ public class LiveWallpaperPreview extends Activity {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (mWallpaperConnection != null && mWallpaperConnection.mEngine != null) {
-            MotionEvent dup = MotionEvent.obtainNoHistory(ev);
-            try {
-                mWallpaperConnection.mEngine.dispatchPointer(dup);
-            } catch (RemoteException e) {
-            }
-        }
-
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             onUserInteraction();
         }
@@ -521,6 +513,12 @@ public class LiveWallpaperPreview extends Activity {
         }
 
         if (!handled && mWallpaperConnection != null && mWallpaperConnection.mEngine != null) {
+            MotionEvent dup = MotionEvent.obtainNoHistory(ev);
+            try {
+                mWallpaperConnection.mEngine.dispatchPointer(dup);
+            } catch (RemoteException e) {
+            }
+
             int action = ev.getActionMasked();
             try {
                 if (action == MotionEvent.ACTION_UP) {
