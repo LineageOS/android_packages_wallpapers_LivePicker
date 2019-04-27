@@ -21,7 +21,6 @@
     <color name="live_wallpaper_thumbnail_background">#CC666666</color>
     <color name="live_wallpaper_thumbnail_text_color">#FFFFFFFF</color>
 
-    <color name="translucent_blue_light">#66133659</color>
-    <color name="translucent_blue_dark">#99133659</color>
+    <color name="translucent_black">#66000000</color>
 </resources>
 
