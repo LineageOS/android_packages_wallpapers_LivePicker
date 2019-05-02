@@ -46,29 +46,37 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <LinearLayout
-            android:id="@+id/bottom_pane"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinator_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/translucent_black"
             android:orientation="vertical">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tablayout"
+            <LinearLayout
+                android:id="@+id/bottom_pane"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/TabLayoutStyle"
-                android:visibility="gone" />
+                android:background="@color/translucent_black"
+                android:orientation="vertical"
+                app:behavior_peekHeight="@dimen/preview_attribution_pane_collapsed_height"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-            <com.android.wallpaper.livepicker.widget.ConstraintViewPager
-                android:id="@+id/viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tablayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TabLayoutStyle"
+                    android:visibility="gone"/>
 
-            </com.android.wallpaper.livepicker.widget.ConstraintViewPager>
+                <com.android.wallpaper.livepicker.widget.ConstraintViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-        </LinearLayout>
+            </LinearLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <android.widget.Toolbar
             android:id="@+id/toolbar"

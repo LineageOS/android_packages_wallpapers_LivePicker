@@ -33,6 +33,7 @@
     <dimen name="preview_gradient_background_height">256dp</dimen>
 
     <!-- Dimensions for the preview attribution pane. -->
+    <dimen name="preview_attribution_pane_collapsed_height">0dp</dimen>
     <dimen name="preview_attribution_pane_horizontal_padding">24dp</dimen>
     <dimen name="preview_attribution_pane_extra_spacer_height">16dp</dimen>
     <dimen name="preview_attribution_pane_inner_spacer_height">14dp</dimen>
