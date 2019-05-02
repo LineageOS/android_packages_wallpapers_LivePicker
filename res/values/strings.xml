@@ -33,6 +33,8 @@
     <string name="configure_wallpaper">Settings…</string>
     <!-- List item for deleting the current wallpaper -->
     <string name="delete_live_wallpaper">Delete</string>
+    <!-- List item for showing the current wallpaper by hiding bottom panel. -->
+    <string name="preview">Preview</string>
     <!-- Button label on Wallpaper Gallery screen; user selects this button to set a specific wallpaper -->
     <string name="wallpaper_instructions">Set wallpaper</string>
     <!-- Warning message, no live wallpapers available. -->
@@ -61,4 +63,12 @@
 
     <!-- Confirmation dialog. Shown after user selects to delete one wallpaper. [CHAR LIMIT=NONE]  -->
     <string name="delete_wallpaper_confirmation">Delete this wallpaper from your phone?</string>
+
+    <!-- Content description for a checkbox letting the user collapse a visual panel showing info
+         about the wallpaper being previewed. [CHAR LIMIT=none] -->
+    <string name="collapse_attribution_panel">Collapse wallpaper info panel</string>
+
+    <!-- Content description for a checkbox letting the user expand a visual panel showing info
+         about the wallpaper being previewed. [CHAR LIMIT=none] -->
+    <string name="expand_attribution_panel">Expand wallpaper info panel</string>
 </resources>
