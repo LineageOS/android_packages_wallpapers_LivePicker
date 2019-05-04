@@ -43,7 +43,6 @@ import android.service.wallpaper.IWallpaperEngine;
 import android.service.wallpaper.IWallpaperService;
 import android.service.wallpaper.WallpaperService;
 import android.service.wallpaper.WallpaperSettingsActivity;
-import com.google.android.material.tabs.TabLayout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
@@ -58,6 +57,7 @@ import android.view.WindowManager.LayoutParams;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -70,6 +70,10 @@ import androidx.slice.widget.SliceLiveData;
 import androidx.slice.widget.SliceView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback;
+import com.google.android.material.tabs.TabLayout;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -90,6 +94,11 @@ public class LiveWallpaperPreview extends Activity {
     private Intent mDeleteIntent;
 
     private View mLoading;
+    private View mViewBottomPane;
+    private BottomSheetBehavior mBottomSheetBehavior;
+    private ViewPager mViewPager;
+    private TabLayout mTabLayout;
+    private CheckBox mPreview;
 
     protected final List<Pair<String, View>> mPages = new ArrayList<>();
     private SliceView mSliceViewSettings;
@@ -282,9 +291,12 @@ public class LiveWallpaperPreview extends Activity {
     }
 
     private void populateBottomPane() {
-        final View viewBottomPane = findViewById(R.id.bottom_pane);
-        final ViewPager viewPager = findViewById(R.id.viewpager);
-        final TabLayout tabLayout = findViewById(R.id.tablayout);
+        mViewBottomPane = findViewById(R.id.bottom_pane);
+        mViewPager = findViewById(R.id.viewpager);
+        mTabLayout = findViewById(R.id.tablayout);
+
+        mBottomSheetBehavior = BottomSheetBehavior.from(mViewBottomPane);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
         // Create PagerAdapter
         final PagerAdapter pagerAdapter = new PagerAdapter() {
@@ -325,24 +337,24 @@ public class LiveWallpaperPreview extends Activity {
         };
 
         // Add OnPageChangeListener to re-measure ViewPager's height
-        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                viewPager.requestLayout();
+                mViewPager.requestLayout();
             }
         });
 
         // Set PagerAdapter
-        viewPager.setAdapter(pagerAdapter);
+        mViewPager.setAdapter(pagerAdapter);
 
         // Make TabLayout visible if there are more than one page
         if (mPages.size() > 1) {
-            tabLayout.setVisibility(View.VISIBLE);
-            tabLayout.setupWithViewPager(viewPager);
+            mTabLayout.setVisibility(View.VISIBLE);
+            mTabLayout.setupWithViewPager(mViewPager);
         }
 
         // Initializes a rounded rectangle outline and clips the upper corners to be rounded.
-        viewBottomPane.setOutlineProvider(new ViewOutlineProvider() {
+        mViewBottomPane.setOutlineProvider(new ViewOutlineProvider() {
             private final int radius = getResources().getDimensionPixelSize(
                     R.dimen.preview_viewpager_round_radius);
 
@@ -352,15 +364,71 @@ public class LiveWallpaperPreview extends Activity {
                         view.getHeight() + radius, radius);
             }
         });
-        viewBottomPane.setClipToOutline(true);
+        mViewBottomPane.setClipToOutline(true);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_preview, menu);
+        setupPreviewMenu(menu);
         menu.findItem(R.id.configure).setVisible(mSettingsIntent != null);
         menu.findItem(R.id.delete_wallpaper).setVisible(mDeleteIntent != null);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void setupPreviewMenu(Menu menu) {
+        mPreview = (CheckBox) menu.findItem(R.id.preview).getActionView();
+        mPreview.setOnClickListener(this::setPreviewBehavior);
+
+        BottomSheetCallback callback = new BottomSheetCallback() {
+            @Override
+            public void onStateChanged(View bottomSheet, int newState) {
+                switch (newState) {
+                    case BottomSheetBehavior.STATE_COLLAPSED:
+                        setPreviewChecked(true /* checked */);
+                        break;
+                    case BottomSheetBehavior.STATE_EXPANDED:
+                        setPreviewChecked(false /* checked */);
+                        break;
+                }
+            }
+
+            @Override
+            public void onSlide(View bottomSheet, float slideOffset) {
+                mTabLayout.setAlpha(slideOffset);
+                mViewPager.setAlpha(slideOffset);
+            }
+        };
+        mBottomSheetBehavior.setBottomSheetCallback(callback);
+
+        int state = mBottomSheetBehavior.getState();
+        callback.onStateChanged(mViewBottomPane, state);
+        switch (state) {
+            case BottomSheetBehavior.STATE_COLLAPSED:
+                callback.onSlide(mViewBottomPane, 0f);
+                break;
+            case BottomSheetBehavior.STATE_EXPANDED:
+                callback.onSlide(mViewBottomPane, 1f);
+                break;
+        }
+    }
+
+    private void setPreviewChecked(boolean checked) {
+        if (mPreview != null) {
+            mPreview.setChecked(checked);
+            int resId = checked ? R.string.expand_attribution_panel
+                    : R.string.collapse_attribution_panel;
+            mPreview.setContentDescription(getResources().getString(resId));
+        }
+    }
+
+    private void setPreviewBehavior(final View v) {
+        CheckBox checkbox = (CheckBox) v;
+        if (checkbox.isChecked()) {
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        } else {
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        }
     }
 
     public void setLiveWallpaper(final View v) {
