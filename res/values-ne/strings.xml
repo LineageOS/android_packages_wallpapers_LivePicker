@@ -25,6 +25,8 @@
     <string name="live_wallpaper_preview_title" msgid="1130080613611954763">"लाइभ वालपेपरको पूर्वावलोकन"</string>
     <string name="configure_wallpaper" msgid="7396598925806288258">"सेटिङहरू"</string>
     <string name="delete_live_wallpaper" msgid="5127205073129449497">"मेट्नुहोस्"</string>
+    <!-- no translation found for preview (5553971347768345401) -->
+    <skip />
     <string name="wallpaper_instructions" msgid="4215640646180727542">"वालपेपर मिलाउनुहोस्"</string>
     <string name="live_wallpaper_empty" msgid="4278728108785853407">"कुनै लाइभ वालपेपर छैन।"</string>
     <string name="set_live_wallpaper" msgid="2381437614949033266">"वालपेपरलाई  मिलाउनुहोस्"</string>
@@ -36,4 +38,6 @@
     <string name="tab_info" msgid="2612717074705274392">"जानकारी"</string>
     <string name="tab_customize" msgid="5282247400178296263">"आफू अनुकूल पार्नुहोस्"</string>
     <string name="delete_wallpaper_confirmation" msgid="6449356646369781400">"तपाईंको फोनबाट यो वालपेपर मेटाउने हो?"</string>
+    <string name="collapse_attribution_panel" msgid="4998500891743118630">"वालपेपर सम्बन्धी जानकारीको प्यानेललाई संक्षिप्त गर्नुहोस्"</string>
+    <string name="expand_attribution_panel" msgid="3151357815478885438">"वालपेपर सम्बन्धी जानकारीको प्यानेललाई विस्तृत गर्नुहोस्"</string>
 </resources>

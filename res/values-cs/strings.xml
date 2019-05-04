@@ -25,6 +25,8 @@
     <string name="live_wallpaper_preview_title" msgid="1130080613611954763">"Náhled živé tapety"</string>
     <string name="configure_wallpaper" msgid="7396598925806288258">"Nastavení…"</string>
     <string name="delete_live_wallpaper" msgid="5127205073129449497">"Smazat"</string>
+    <!-- no translation found for preview (5553971347768345401) -->
+    <skip />
     <string name="wallpaper_instructions" msgid="4215640646180727542">"Nastavit tapetu"</string>
     <string name="live_wallpaper_empty" msgid="4278728108785853407">"Žádné živé tapety."</string>
     <string name="set_live_wallpaper" msgid="2381437614949033266">"Nastavit tapetu"</string>
@@ -36,4 +38,6 @@
     <string name="tab_info" msgid="2612717074705274392">"Informace"</string>
     <string name="tab_customize" msgid="5282247400178296263">"Přizpůsobit"</string>
     <string name="delete_wallpaper_confirmation" msgid="6449356646369781400">"Smazat tapetu z telefonu?"</string>
+    <string name="collapse_attribution_panel" msgid="4998500891743118630">"Sbalit informační panel tapety"</string>
+    <string name="expand_attribution_panel" msgid="3151357815478885438">"Rozbalit informační panel tapety"</string>
 </resources>
