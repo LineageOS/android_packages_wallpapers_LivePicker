@@ -20,6 +20,7 @@ import android.app.WallpaperInfo;
 import android.app.WallpaperManager;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
@@ -87,7 +88,10 @@ public class LiveWallpaperChange extends LiveWallpaperPreview {
     @Nullable
     private String getDeleteAction(@NonNull ServiceInfo serviceInfo,
         @Nullable ServiceInfo currentService) {
-        // STOPSHIP: Check this wallpaper is pre-installed before providing delete action.
+        if (!isPackagePreInstalled(serviceInfo.applicationInfo)) {
+            Log.d(TAG, "This wallpaper is not pre-installed: " + serviceInfo.name);
+            return null;
+        }
 
         // A currently set Live wallpaper should not be deleted.
         if (currentService != null && TextUtils.equals(serviceInfo.name, currentService.name)) {
@@ -99,5 +103,12 @@ public class LiveWallpaperChange extends LiveWallpaperPreview {
             return metaData.getString(KEY_ACTION_DELETE_LIVE_WALLPAPER);
         }
         return null;
+    }
+
+    private boolean isPackagePreInstalled(ApplicationInfo info) {
+        if (info != null && (info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+            return true;
+        }
+        return false;
     }
 }
