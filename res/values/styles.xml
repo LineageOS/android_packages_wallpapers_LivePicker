@@ -67,4 +67,13 @@
         <item name="android:textAllCaps">false</item>
         <item name="strokeColor">@*android:color/primary_device_default_light</item>
     </style>
+
+    <style name="WallpaperSliceStyle" parent="@style/Widget.SliceView">
+        <item name="headerTitleSize">@*android:dimen/text_size_subhead_material</item>
+        <item name="headerSubtitleSize">@*android:dimen/text_size_subhead_material</item>
+        <item name="titleSize">@*android:dimen/text_size_subhead_material</item>
+        <item name="subtitleSize">@*android:dimen/text_size_caption_material</item>
+        <item name="gridTitleSize">@*android:dimen/text_size_subhead_material</item>
+        <item name="gridSubtitleSize">@*android:dimen/text_size_caption_material</item>
+    </style>
 </resources>
