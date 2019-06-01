@@ -18,5 +18,9 @@
 -->
 
 <resources>
+    <style name="ButtonStyle" parent="@style/ButtonStyle.Base">
+        <item name="android:textColor">?android:textColorPrimaryInverse</item>
+    </style>
+
     <style name="AlertDialogStyle" parent="@android:style/Theme.DeviceDefault.Dialog.Alert"/>
 </resources>

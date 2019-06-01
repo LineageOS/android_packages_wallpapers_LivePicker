@@ -21,7 +21,7 @@
 
     <style name="LivePickerTheme" parent="@android:style/Theme.DeviceDefault.Settings"/>
 
-    <style name="Preview" parent="@style/Theme.MaterialComponents.NoActionBar">
+    <style name="Preview" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowDisablePreview">true</item>
@@ -30,11 +30,10 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@color/translucent_black</item>
 
-        <item name="android:colorAccent">@*android:color/accent_device_default_light</item>
-        <item name="colorAccent">@*android:color/accent_device_default_light</item>
+        <!-- Button corner -->
+        <item name="android:buttonCornerRadius">@*android:dimen/config_buttonCornerRadius</item>
 
-        <item name="colorPrimary">@*android:color/accent_device_default_light</item>
-        <item name="colorOnPrimary">@*android:color/primary_device_default_light</item>
+        <item name="colorAccent">@*android:color/accent_device_default</item>
     </style>
 
     <style name="TranslucentToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -55,17 +54,23 @@
 
     <style name="AlertDialogStyle" parent="@android:style/Theme.DeviceDefault.Light.Dialog.Alert"/>
 
-    <style name="ButtonStyle" parent="@style/Widget.MaterialComponents.Button">
+    <style name="ButtonStyle.Base" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/btn_colored_background</item>
         <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Widget.Button</item>
-        <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:textAllCaps">false</item>
+        <item name="android:padding">@dimen/preview_attribution_pane_button_padding</item>
+        <item name="android:minHeight">@dimen/preview_attribution_pane_button_height</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
     </style>
 
-    <style name="OutlinedButtonStyle" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Widget.Button</item>
+    <style name="ButtonStyle" parent="@style/ButtonStyle.Base">
         <item name="android:textColor">?android:textColorPrimary</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="strokeColor">@*android:color/primary_device_default_light</item>
+    </style>
+
+    <style name="OutlinedButtonStyle" parent="@style/ButtonStyle">
+        <item name="android:background">@drawable/btn_transparent</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
     </style>
 
     <style name="WallpaperSliceStyle" parent="@style/Widget.SliceView">
