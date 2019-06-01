@@ -71,7 +71,7 @@
         android:layout_marginBottom="@dimen/preview_attribution_pane_button_bottom_margin"
         android:orientation="horizontal">
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/preview_attribution_pane_explore_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
             android:layout_weight="1"
             android:visibility="gone"/>
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/preview_attribution_pane_set_wallpaper_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
