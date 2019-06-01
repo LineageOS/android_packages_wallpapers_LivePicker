@@ -22,5 +22,7 @@
     <color name="live_wallpaper_thumbnail_text_color">#FFFFFFFF</color>
 
     <color name="translucent_black">#66000000</color>
+
+    <color name="ripple_button_color">@*android:color/ripple_material_light</color>
 </resources>
 
