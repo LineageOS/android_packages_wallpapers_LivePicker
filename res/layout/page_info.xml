@@ -55,6 +55,7 @@
         android:forceHasOverlappingRendering="false"
         android:gravity="center_horizontal"
         android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Caption"
+        android:textColor="?android:attr/textColorPrimary"
         android:visibility="gone"/>
 
     <Space
