@@ -15,7 +15,5 @@
 -->
 
 <resources>
-    <color name="translucent_black">#B3000000</color>
-
     <color name="ripple_button_color">@*android:color/ripple_material_dark</color>
 </resources>
