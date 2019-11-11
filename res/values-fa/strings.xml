@@ -30,7 +30,7 @@
     <string name="live_wallpaper_empty" msgid="8057319062274870589">"تصویر زمینه زنده ای موجود نیست."</string>
     <string name="set_live_wallpaper" msgid="764007409845174475">"تنظیم کاغذدیواری"</string>
     <string name="wallpaper_title_and_author" msgid="7606029050779779421">"<xliff:g id="TITLE">%1$s</xliff:g> توسط <xliff:g id="AUTHOR">%2$s</xliff:g>"</string>
-    <string name="live_wallpaper_loading" msgid="7218845906181560315">"در حال بارگیری کاغذدیواری زنده..."</string>
+    <string name="live_wallpaper_loading" msgid="7218845906181560315">"درحال بارکردن کاغذدیواری زنده…"</string>
     <string name="which_wallpaper_option_home_screen" msgid="3323619298489943624">"صفحه اصلی"</string>
     <string name="which_wallpaper_option_home_screen_and_lock_screen" msgid="1650093303691767601">"صفحه اصلی و صفحه قفل"</string>
     <string name="explore_further" msgid="489032063223099244">"کاوش"</string>
