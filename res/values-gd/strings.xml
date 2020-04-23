@@ -17,8 +17,8 @@
 */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="which_wallpaper_option_home_screen">Agdil agejdan</string>
-    <string name="which_wallpaper_option_home_screen_and_lock_screen">Agdil agejdan d ugdil n usekker</string>
-    <string name="collapse_attribution_panel">Fneẓ agalis n telɣut n tugna n ugilal</string>
-    <string name="expand_attribution_panel">Snefli agalis n telɣut n tugna n ugilal</string>
+    <string name="configure_wallpaper">Roghainnean…</string>
+    <string name="wallpaper_instructions">Suidhich pàipear-balla</string>
+    <string name="set_live_wallpaper">Suidhich pàipear-balla</string>
+    <string name="which_wallpaper_option_home_screen">An sgrìn dachaigh</string>
 </resources>
