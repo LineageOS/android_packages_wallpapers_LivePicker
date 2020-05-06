@@ -19,7 +19,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="application_name" msgid="321870838342157591">"நேரலை வால்பேப்பர் தேர்வி"</string>
+    <string name="application_name" msgid="321870838342157591">"நேரலை வால்பேப்பர் தேர்வுக் கருவி"</string>
     <string name="live_wallpaper_picker_title" msgid="6152733341691314608">"நேரலை வால்பேப்பரைத் தேர்ந்தெடுக்கவும்"</string>
     <string name="live_wallpaper_picker_label" msgid="295628316836042825">"லைவ் வால்பேப்பர்கள்"</string>
     <string name="live_wallpaper_preview_title" msgid="908570871421455329">"நேரலை வால்பேப்பரின் மாதிரிக்காட்சி"</string>
