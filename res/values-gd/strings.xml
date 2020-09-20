@@ -21,4 +21,7 @@
     <string name="wallpaper_instructions">Suidhich pàipear-balla</string>
     <string name="set_live_wallpaper">Suidhich pàipear-balla</string>
     <string name="which_wallpaper_option_home_screen">An sgrìn dachaigh</string>
+    <string name="which_wallpaper_option_home_screen_and_lock_screen">An sgrìn dachaigh ’s an sgrìn-ghlasaidh</string>
+    <string name="collapse_attribution_panel">Co-theannaich leòsan fiosrachadh a’ phàipeir-bhalla</string>
+    <string name="expand_attribution_panel">Leudaich leòsan fiosrachadh a’ phàipeir-bhalla</string>
 </resources>
