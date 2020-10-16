@@ -17,8 +17,18 @@
 */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="application_name">Roghnaichear nam pàipear-balla beòtha</string>
+    <string name="live_wallpaper_picker_title">Tagh pàipear-balla beò</string>
+    <string name="live_wallpaper_picker_label">Pàipearan-balla beòtha</string>
+    <string name="live_wallpaper_preview_title">Ro-shealladh air pàipear-balla beò</string>
     <string name="configure_wallpaper">Roghainnean…</string>
     <string name="wallpaper_instructions">Suidhich pàipear-balla</string>
+    <string name="live_wallpaper_empty">Chan eil pàipear-balla beò ann.</string>
     <string name="set_live_wallpaper">Suidhich pàipear-balla</string>
+    <string name="wallpaper_title_and_author"><xliff:g id="title" example="Galaxy">%1$s</xliff:g> le <xliff:g id="author" example="Google">%2$s</xliff:g></string>
+    <string name="live_wallpaper_loading">A’ luchdadh a’ pàipeir-bhalla bheò…</string>
     <string name="which_wallpaper_option_home_screen">An sgrìn dachaigh</string>
+    <string name="which_wallpaper_option_home_screen_and_lock_screen">An sgrìn dachaigh ’s an sgrìn-ghlasaidh</string>
+    <string name="collapse_attribution_panel">Co-theannaich leòsan fiosrachadh a’ phàipeir-bhalla</string>
+    <string name="expand_attribution_panel">Leudaich leòsan fiosrachadh a’ phàipeir-bhalla</string>
 </resources>
