@@ -32,7 +32,7 @@
     <string name="wallpaper_title_and_author" msgid="7606029050779779421">"<xliff:g id="TITLE">%1$s</xliff:g> بواسطة <xliff:g id="AUTHOR">%2$s</xliff:g>"</string>
     <string name="live_wallpaper_loading" msgid="7218845906181560315">"جارٍ تحميل الخلفية المتحركة..."</string>
     <string name="which_wallpaper_option_home_screen" msgid="3323619298489943624">"الشاشة الرئيسية"</string>
-    <string name="which_wallpaper_option_home_screen_and_lock_screen" msgid="1650093303691767601">"الشاشة الرئيسية وشاشة التأمين"</string>
+    <string name="which_wallpaper_option_home_screen_and_lock_screen" msgid="1650093303691767601">"الشاشة الرئيسية وشاشة القفل"</string>
     <string name="explore_further" msgid="489032063223099244">"استكشاف"</string>
     <string name="tab_info" msgid="5501369870701932475">"معلومات"</string>
     <string name="tab_customize" msgid="9007237541087328909">"تخصيص"</string>
