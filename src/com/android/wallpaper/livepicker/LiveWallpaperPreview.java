@@ -32,6 +32,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Outline;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -627,6 +628,12 @@ public class LiveWallpaperPreview extends Activity {
                 }
                 mService = null;
             }
+        }
+
+        @Override
+        public void onLocalWallpaperColorsChanged(RectF area,
+                WallpaperColors colors, int displayId) {
+
         }
 
         public void onServiceConnected(ComponentName name, IBinder service) {
