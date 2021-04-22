@@ -36,7 +36,7 @@
     <string name="explore_further" msgid="489032063223099244">"Explorar"</string>
     <string name="tab_info" msgid="5501369870701932475">"Información"</string>
     <string name="tab_customize" msgid="9007237541087328909">"Personalizar"</string>
-    <string name="delete_wallpaper_confirmation" msgid="252765957117597457">"¿Quieres eliminar este fondo de pantalla de tu teléfono?"</string>
+    <string name="delete_wallpaper_confirmation" msgid="252765957117597457">"¿Eliminar este fondo de pantalla de tu teléfono?"</string>
     <string name="collapse_attribution_panel" msgid="5368959884531941653">"Ocultar el panel de información del fondo de pantalla"</string>
     <string name="expand_attribution_panel" msgid="6540929859713706255">"Mostrar el panel de información del fondo de pantalla"</string>
 </resources>
