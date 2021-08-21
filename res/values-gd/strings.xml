@@ -22,6 +22,8 @@
     <string name="live_wallpaper_picker_label">Pàipearan-balla beòtha</string>
     <string name="live_wallpaper_preview_title">Ro-shealladh air pàipear-balla beò</string>
     <string name="configure_wallpaper">Roghainnean…</string>
+    <string name="delete_live_wallpaper">Sguab às</string>
+    <string name="preview">Ro-sheall</string>
     <string name="wallpaper_instructions">Suidhich pàipear-balla</string>
     <string name="live_wallpaper_empty">Chan eil pàipear-balla beò ann.</string>
     <string name="set_live_wallpaper">Suidhich pàipear-balla</string>
@@ -29,6 +31,10 @@
     <string name="live_wallpaper_loading">A’ luchdadh a’ pàipeir-bhalla bheò…</string>
     <string name="which_wallpaper_option_home_screen">An sgrìn dachaigh</string>
     <string name="which_wallpaper_option_home_screen_and_lock_screen">An sgrìn dachaigh ’s an sgrìn-ghlasaidh</string>
+    <string name="explore_further">Rùraich</string>
+    <string name="tab_info">Fiosrachadh</string>
+    <string name="tab_customize">Gnàthaich</string>
+    <string name="delete_wallpaper_confirmation">A bheil thu airson am pàipear-balla seo a sguabadh às on fhòn agad?</string>
     <string name="collapse_attribution_panel">Co-theannaich leòsan fiosrachadh a’ phàipeir-bhalla</string>
     <string name="expand_attribution_panel">Leudaich leòsan fiosrachadh a’ phàipeir-bhalla</string>
 </resources>
