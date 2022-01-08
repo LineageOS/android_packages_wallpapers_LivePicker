@@ -17,24 +17,50 @@
 */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- General -->
+    <!-- Application name -->
     <string name="application_name">Roghnaichear nam pàipear-balla beòtha</string>
+    <!-- Title for the screen that lets the user choose a live wallpaper to use
+         for the system. -->
     <string name="live_wallpaper_picker_title">Tagh pàipear-balla beò</string>
+    <!-- Label for the live wallpaper picker [CHAR_LIMIT=40]-->
     <string name="live_wallpaper_picker_label">Pàipearan-balla beòtha</string>
+    <!-- Title for the screen that lets the user preview a live wallpaper. -->
     <string name="live_wallpaper_preview_title">Ro-shealladh air pàipear-balla beò</string>
+    <!-- List item for configuring the current wallpaper -->
     <string name="configure_wallpaper">Roghainnean…</string>
+    <!-- List item for deleting the current wallpaper -->
     <string name="delete_live_wallpaper">Sguab às</string>
+    <!-- List item for showing the current wallpaper by hiding bottom panel. -->
     <string name="preview">Ro-sheall</string>
+    <!-- Button label on Wallpaper Gallery screen; user selects this button to set a specific wallpaper -->
     <string name="wallpaper_instructions">Suidhich pàipear-balla</string>
+    <!-- Warning message, no live wallpapers available. -->
     <string name="live_wallpaper_empty">Chan eil pàipear-balla beò ann.</string>
+    <!-- Button label, action, sets the currently selected wallpaper. -->
     <string name="set_live_wallpaper">Suidhich pàipear-balla</string>
+    <!-- Label, title and author of the live wallpaper -->
     <string name="wallpaper_title_and_author"><xliff:g id="title" example="Galaxy">%1$s</xliff:g> le <xliff:g id="author" example="Google">%2$s</xliff:g></string>
+    <!-- Message, tells the user the selected live wallpaper is loading. -->
     <string name="live_wallpaper_loading">A’ luchdadh a’ pàipeir-bhalla bheò…</string>
+    <!-- Option for setting the wallpaper only on the home screen. -->
     <string name="which_wallpaper_option_home_screen">An sgrìn dachaigh</string>
+    <!-- Option for setting the wallpaper on both the home screen and lock screen. -->
     <string name="which_wallpaper_option_home_screen_and_lock_screen">An sgrìn dachaigh ’s an sgrìn-ghlasaidh</string>
+    <!-- Button label on attribution panel, explores further context about the wallpaper.
+         [CHAR_LIMIT=15] -->
     <string name="explore_further">Rùraich</string>
+    <!-- Label for the 'Info' tab of view pager in wallpaper preview activity. [CHAR_LIMIT=25] -->
     <string name="tab_info">Fiosrachadh</string>
+    <!-- Label for the 'Customize' tab of view pager in wallpaper preview activity.
+         [CHAR_LIMIT=25] -->
     <string name="tab_customize">Gnàthaich</string>
+    <!-- Confirmation dialog. Shown after user selects to delete one wallpaper. [CHAR LIMIT=NONE]  -->
     <string name="delete_wallpaper_confirmation">A bheil thu airson am pàipear-balla seo a sguabadh às on fhòn agad?</string>
+    <!-- Content description for a checkbox letting the user collapse a visual panel showing info
+         about the wallpaper being previewed. [CHAR LIMIT=none] -->
     <string name="collapse_attribution_panel">Co-theannaich leòsan fiosrachadh a’ phàipeir-bhalla</string>
+    <!-- Content description for a checkbox letting the user expand a visual panel showing info
+         about the wallpaper being previewed. [CHAR LIMIT=none] -->
     <string name="expand_attribution_panel">Leudaich leòsan fiosrachadh a’ phàipeir-bhalla</string>
 </resources>
