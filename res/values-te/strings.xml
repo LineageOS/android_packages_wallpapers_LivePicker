@@ -26,9 +26,9 @@
     <string name="configure_wallpaper" msgid="4308477548538487192">"సెట్టింగ్‌లు…"</string>
     <string name="delete_live_wallpaper" msgid="2401799265848069389">"తొలగించండి"</string>
     <string name="preview" msgid="1067744492020029129">"ప్రివ్యూ"</string>
-    <string name="wallpaper_instructions" msgid="6112878742140691445">"వాల్‌పేపర్‌ను సెట్ చేయి"</string>
+    <string name="wallpaper_instructions" msgid="6112878742140691445">"వాల్‌పేపర్‌ను సెట్ చేయండి"</string>
     <string name="live_wallpaper_empty" msgid="8057319062274870589">"లైవ్ వాల్‌పేపర్‌లు లేవు."</string>
-    <string name="set_live_wallpaper" msgid="764007409845174475">"వాల్‌పేపర్‌ను సెట్ చేయి"</string>
+    <string name="set_live_wallpaper" msgid="764007409845174475">"వాల్‌పేపర్‌ను సెట్ చేయండి"</string>
     <string name="wallpaper_title_and_author" msgid="7606029050779779421">"<xliff:g id="AUTHOR">%2$s</xliff:g> ద్వారా <xliff:g id="TITLE">%1$s</xliff:g>"</string>
     <string name="live_wallpaper_loading" msgid="7218845906181560315">"ప్రదర్శిత వాల్‌పేపర్‌ను లోడ్ చేస్తోంది…"</string>
     <string name="which_wallpaper_option_home_screen" msgid="3323619298489943624">"హోమ్ స్క్రీన్"</string>
