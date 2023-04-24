@@ -17,8 +17,16 @@
 */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="configure_wallpaper">Iɣewwaren...</string>
+    <string name="delete_live_wallpaper">Mḥu</string>
+    <string name="preview">Timeẓriwt</string>
+    <string name="wallpaper_instructions">Sbadu agalis</string>
+    <string name="set_live_wallpaper">Sbadu agalis</string>
     <string name="which_wallpaper_option_home_screen">Agdil agejdan</string>
     <string name="which_wallpaper_option_home_screen_and_lock_screen">Agdil agejdan d ugdil n usekker</string>
+    <string name="explore_further">Snirem</string>
+    <string name="tab_info">Talɣut</string>
+    <string name="tab_customize">Sagen</string>
     <string name="collapse_attribution_panel">Fneẓ agalis n telɣut n tugna n ugilal</string>
     <string name="expand_attribution_panel">Snefli agalis n telɣut n tugna n ugilal</string>
 </resources>
