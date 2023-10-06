@@ -25,7 +25,7 @@
     <string name="live_wallpaper_preview_title" msgid="908570871421455329">"ቀጥታ የሚተላለፍ ልጣፍ ቅድመ ዕይታ"</string>
     <string name="configure_wallpaper" msgid="4308477548538487192">"ቅንብሮች…"</string>
     <string name="delete_live_wallpaper" msgid="2401799265848069389">"ሰርዝ"</string>
-    <string name="preview" msgid="1067744492020029129">"ቅድመ-እይታ"</string>
+    <string name="preview" msgid="1067744492020029129">"ቅድመ-ዕይታ"</string>
     <string name="wallpaper_instructions" msgid="6112878742140691445">"ልጣፍ አዘጋጅ"</string>
     <string name="live_wallpaper_empty" msgid="8057319062274870589">"የቀጥታ ስርጭት ልጣፍ የለም።"</string>
     <string name="set_live_wallpaper" msgid="764007409845174475">"ልጣፍ አዘጋጅ"</string>
