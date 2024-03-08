@@ -154,7 +154,7 @@ public class LiveWallpaperPreview extends Activity {
         toolbar.setNavigationIcon(backArrow);
 
         mWallpaperManager = WallpaperManager.getInstance(this);
-        mWallpaperConnection = new WallpaperConnection(mWallpaperIntent);
+        mWallpaperConnection = new WallpaperConnection(mWallpaperIntent, info);
         getWindow().getDecorView().post(new Runnable() {
             public void run() {
                 if (!mWallpaperConnection.connect()) {
@@ -593,9 +593,11 @@ public class LiveWallpaperPreview extends Activity {
         boolean mConnected;
         boolean mIsVisible;
         boolean mIsEngineVisible;
+        WallpaperInfo mInfo;
 
-        WallpaperConnection(Intent intent) {
+        WallpaperConnection(Intent intent, WallpaperInfo info) {
             mIntent = intent;
+            mInfo = info;
         }
 
         public boolean connect() {
@@ -645,7 +647,7 @@ public class LiveWallpaperPreview extends Activity {
                     mService.attach(this, root.getWindowToken(),
                             LayoutParams.TYPE_APPLICATION_MEDIA, true, root.getWidth(),
                             root.getHeight(), new Rect(0, 0, 0, 0), displayId,
-                            WallpaperManager.FLAG_SYSTEM);
+                            WallpaperManager.FLAG_SYSTEM, mInfo);
                 } catch (RemoteException e) {
                     Log.w(LOG_TAG, "Failed attaching wallpaper; clearing", e);
                 }
