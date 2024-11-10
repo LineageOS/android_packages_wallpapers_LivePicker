@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.WallpaperColors;
 import android.app.WallpaperInfo;
 import android.app.WallpaperManager;
+import android.app.wallpaper.WallpaperDescription;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -687,10 +688,12 @@ public class LiveWallpaperPreview extends Activity {
                     if (tryPreUAttach(root, displayId)) return;
                     if (tryPreBAttach(root, displayId)) return;
 
+                    WallpaperDescription desc = new WallpaperDescription.Builder().setComponent(
+                            (mInfo != null) ? mInfo.getComponent() : null).build();
                     mService.attach(this, root.getWindowToken(),
                             LayoutParams.TYPE_APPLICATION_MEDIA, true, root.getWidth(),
                             root.getHeight(), new Rect(0, 0, 0, 0), displayId,
-                            WallpaperManager.FLAG_SYSTEM, mInfo, null);
+                            WallpaperManager.FLAG_SYSTEM, mInfo, desc);
                     Log.d(LOG_TAG, " called IWallpaperService#attach method with "
                             + "WallpaperDescription");
                 } catch (RemoteException e) {
