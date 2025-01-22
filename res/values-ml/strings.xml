@@ -32,6 +32,8 @@
     <string name="wallpaper_title_and_author" msgid="7606029050779779421">"<xliff:g id="TITLE">%1$s</xliff:g> / <xliff:g id="AUTHOR">%2$s</xliff:g>"</string>
     <string name="live_wallpaper_loading" msgid="7218845906181560315">"സജീവ വാൾപേപ്പർ ലോഡുചെയ്യുന്നു..."</string>
     <string name="which_wallpaper_option_home_screen" msgid="3323619298489943624">"ഹോം സ്‌ക്രീൻ"</string>
+    <!-- no translation found for which_wallpaper_option_lock_screen (7218277010768547636) -->
+    <skip />
     <string name="which_wallpaper_option_home_screen_and_lock_screen" msgid="1650093303691767601">"ഹോം സ്ക്രീനും ലോക്ക് സ്ക്രീനും"</string>
     <string name="explore_further" msgid="489032063223099244">"അടുത്തറിയുക"</string>
     <string name="tab_info" msgid="5501369870701932475">"വിവരം"</string>
