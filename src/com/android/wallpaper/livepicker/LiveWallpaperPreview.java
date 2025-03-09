@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.WallpaperColors;
 import android.app.WallpaperInfo;
 import android.app.WallpaperManager;
+import android.app.wallpaper.WallpaperDescription;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -77,6 +78,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCa
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -638,16 +641,61 @@ public class LiveWallpaperPreview extends Activity {
 
         }
 
+        /*
+         * Tries to call the attach method used in Android 14(U) and earlier, returning true on
+         * success otherwise false.
+         */
+        private boolean tryPreUAttach(View root, int displayId) {
+            try {
+                Method preUMethod = mService.getClass().getMethod("attach",
+                        IWallpaperConnection.class, IBinder.class, int.class, boolean.class,
+                        int.class, int.class, Rect.class, int.class);
+                preUMethod.invoke(mService,this, root.getWindowToken(),
+                        LayoutParams.TYPE_APPLICATION_MEDIA, true, root.getWidth(),
+                        root.getHeight(), new Rect(0, 0, 0, 0), displayId);
+                return true;
+            } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+                return false;
+            }
+        }
+
+        /*
+         * Tries to call the attach method used in Android 16(B) and earlier, returning true on
+         * success otherwise false.
+         */
+        private boolean tryPreBAttach(View root, int displayId) {
+            try {
+                Method preBMethod = mService.getClass().getMethod("attach",
+                        IWallpaperConnection.class, IBinder.class, int.class, boolean.class,
+                        int.class, int.class, Rect.class, int.class, WallpaperInfo.class);
+                preBMethod.invoke(mService,this, root.getWindowToken(),
+                        LayoutParams.TYPE_APPLICATION_MEDIA, true, root.getWidth(),
+                        root.getHeight(), new Rect(0, 0, 0, 0), displayId,
+                        WallpaperManager.FLAG_SYSTEM, mInfo);
+                return true;
+            } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+                return false;
+            }
+        }
+
         public void onServiceConnected(ComponentName name, IBinder service) {
             if (mWallpaperConnection == this) {
                 mService = IWallpaperService.Stub.asInterface(service);
                 try {
                     final int displayId = getWindow().getDecorView().getDisplay().getDisplayId();
                     final View root = getWindow().getDecorView();
+
+                    if (tryPreUAttach(root, displayId)) return;
+                    if (tryPreBAttach(root, displayId)) return;
+
+                    WallpaperDescription desc = new WallpaperDescription.Builder().setComponent(
+                            (mInfo != null) ? mInfo.getComponent() : null).build();
                     mService.attach(this, root.getWindowToken(),
                             LayoutParams.TYPE_APPLICATION_MEDIA, true, root.getWidth(),
                             root.getHeight(), new Rect(0, 0, 0, 0), displayId,
-                            WallpaperManager.FLAG_SYSTEM, mInfo);
+                            WallpaperManager.FLAG_SYSTEM, mInfo, desc);
+                    Log.d(LOG_TAG, " called IWallpaperService#attach method with "
+                            + "WallpaperDescription");
                 } catch (RemoteException e) {
                     Log.w(LOG_TAG, "Failed attaching wallpaper; clearing", e);
                 }
