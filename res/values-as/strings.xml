@@ -38,6 +38,6 @@
     <string name="tab_info" msgid="5501369870701932475">"তথ্য"</string>
     <string name="tab_customize" msgid="9007237541087328909">"কাষ্টমাইজ কৰক"</string>
     <string name="delete_wallpaper_confirmation" msgid="252765957117597457">"এই ৱালপেপাৰখন আপোনাৰ ফ’নৰ পৰা মচিবনে?"</string>
-    <string name="collapse_attribution_panel" msgid="5368959884531941653">"ৱালপেপাৰ সম্পৰ্কীয় তথ্য়ৰ পেনেল সংকুচিত কৰক"</string>
-    <string name="expand_attribution_panel" msgid="6540929859713706255">"ৱালপেপাৰ সম্পৰ্কীয় তথ্য়ৰ পেনেল বিস্তাৰ কৰক"</string>
+    <string name="collapse_attribution_panel" msgid="5368959884531941653">"ৱালপেপাৰ সম্পৰ্কীয় তথ্যৰ পেনেল সংকুচিত কৰক"</string>
+    <string name="expand_attribution_panel" msgid="6540929859713706255">"ৱালপেপাৰ সম্পৰ্কীয় তথ্যৰ পেনেল বিস্তাৰ কৰক"</string>
 </resources>
