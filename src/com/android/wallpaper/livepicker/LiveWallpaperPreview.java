@@ -725,8 +725,8 @@ public class LiveWallpaperPreview extends Activity {
         }
 
         @Override
-        public void onWallpaperColorsChanged(WallpaperColors colors, int displayId)
-                throws RemoteException {
+        public void onWallpaperColorsChanged(WallpaperColors colors, int displayId,
+                WallpaperColors persistedColors) throws RemoteException {
 
         }
 
