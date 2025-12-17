@@ -35,7 +35,7 @@
     <string name="which_wallpaper_option_lock_screen" msgid="7218277010768547636">"Låseskærm"</string>
     <string name="which_wallpaper_option_home_screen_and_lock_screen" msgid="1650093303691767601">"Startskærm og låseskærm"</string>
     <string name="explore_further" msgid="489032063223099244">"Se mere"</string>
-    <string name="tab_info" msgid="5501369870701932475">"Oplysninger"</string>
+    <string name="tab_info" msgid="5501369870701932475">"Info"</string>
     <string name="tab_customize" msgid="9007237541087328909">"Tilpas"</string>
     <string name="delete_wallpaper_confirmation" msgid="252765957117597457">"Vil du slette denne baggrund på din telefon?"</string>
     <string name="collapse_attribution_panel" msgid="5368959884531941653">"Skjul panelet med oplysninger om baggrunden"</string>
